@@ -1,0 +1,31 @@
+Arguments: 
+  /Users/kennethcassel/.nvm/versions/node/v15.6.0/bin/node /Users/kennethcassel/.nvm/versions/node/v15.6.0/bin/yarn
+
+PATH: 
+  /opt/homebrew/opt/openssl@1.1/bin:/Users/kennethcassel/.poetry/bin:/Users/kennethcassel/.nvm/versions/node/v15.6.0/bin:/Users/kennethcassel/.npm-global/bin:/Users/kennethcassel/Library/Python/3.9/bin:/opt/homebrew/bin:/Library/Frameworks/Python.framework/Versions/3.9/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  15.6.0
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  SyntaxError: /Users/kennethcassel/slip/wasm-run/package.json: Unexpected end of JSON input
+      at JSON.parse (<anonymous>)
+      at /Users/kennethcassel/.nvm/versions/node/v15.6.0/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/Users/kennethcassel/.nvm/versions/node/v15.6.0/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /Users/kennethcassel/.nvm/versions/node/v15.6.0/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
