@@ -38,7 +38,7 @@
     "build": "yarn build:esm && yarn build:cjs",
     "check-types": "tsc",
     "format": "prettier --write --list-different --ignore-path .gitignore .",
-    "lint": "eslint --cache . --ignore-path .gitignore",
+    "lint": "eslint --cache . --ignore-path .gitignore --ignore-pattern 'lib/*'",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "install:clean": "rm -rf node_modules && rm yarn.lock && yarn",
