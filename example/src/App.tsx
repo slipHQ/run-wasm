@@ -20,7 +20,7 @@ function App() {
   }
   return (
     <div className="App">
-      <RunWasm language="Python" code="print('hello world')" />
+      <RunWasm language="Python" code={inputCode} />
       <input
         value={inputCode}
         onChange={(e) => {
