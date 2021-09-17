@@ -2,3 +2,7 @@
 
 /example/node_modules
 /example/build
+
+
+yarn-debug.log*
+yarn-error.log*

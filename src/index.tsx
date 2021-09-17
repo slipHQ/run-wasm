@@ -1,15 +1,22 @@
 import React from 'react'
+import { RunWasmClient } from './RunWasmClient'
 
-const RunWasm = ({
+function RunWasm({
   language,
   code,
 }: {
   language: string
   code: string
-}): JSX.Element => (
-  <div>
-    Run {language} and execute {code}
-  </div>
-)
+}): JSX.Element {
+  return (
+    <div>
+      Run {language} and execute {code}
+    </div>
+  )
+}
 
-export default RunWasm
+const createRunWasmClient = (language: string): RunWasmClient => {
+  return new RunWasmClient(language)
+}
+
+export { RunWasm, createRunWasmClient }
