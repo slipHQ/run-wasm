@@ -1,22 +1,35 @@
-import React, { useState } from 'react'
-import { RunWasm, createRunWasmClient } from 'run-wasm'
+import React, { useEffect, useState } from 'react'
+import { RunWasm, createRunWasmClient, createPythonClient } from 'run-wasm'
 import './App.css'
+declare global {
+  // <- [reference](https://stackoverflow.com/a/56458070/11542903)
+  interface Window {
+    pyodide: any
+    languagePluginLoader: any
+  }
+}
 
 function App() {
-  const [execution, setExecution] = useState('')
-  let client = createRunWasmClient('Python')
+  const [output, setOutput] = useState('loading...')
+  const [inputCode, setInputCode] = useState('')
+  let pythonClient = createPythonClient(window.pyodide)
 
   async function runCode(code: string) {
-    let execution = await client.run({ input: code })
-    setExecution(execution)
+    let output = await pythonClient.run({ code })
+    setOutput(output)
   }
-  runCode("print('hello world')")
-
-  console.log(execution)
   return (
     <div className="App">
       <RunWasm language="Python" code="print('hello world')" />
-      {execution ?? <p>execution</p>}
+      <input
+        value={inputCode}
+        onChange={(e) => {
+          setInputCode(e.target.value)
+        }}
+      />
+      <button onClick={() => runCode(inputCode)}></button>
+
+      {output ?? <p>{output}</p>}
     </div>
   )
 }

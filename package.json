@@ -47,5 +47,8 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "yarn lint",
     "*.{js,jsx,ts,tsx,css,json,md}": "yarn format"
+  },
+  "dependencies": {
+    "pyodide": "^0.18.0"
   }
 }
