@@ -3,6 +3,8 @@
 /example/node_modules
 /example/build
 
+/lib
+
 
 yarn-debug.log*
 yarn-error.log*

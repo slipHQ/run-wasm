@@ -10,14 +10,13 @@ People should be able to use this project to embed executable code snippets on t
 
 We're building this as new component to be used inside the [Slip](https://www.slip.so) authoring tool.
 
-
 ## Development
 
-After cloning to your local machine, you can run a few steps to work on this project. 
+After cloning to your local machine, you can run a few steps to work on this project.
 
 Run `yarn` in the root directory.
 
-Run `yarn build` in the root directory. This will build the `run-wasm` package in the `lib` folder and allow you to import it in the `example` project. 
+Run `yarn build` in the root directory. This will build the `run-wasm` package in the `lib` folder and allow you to import it in the `example` project.
 
 In the `example` project, run `yarn`
 
