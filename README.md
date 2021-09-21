@@ -4,9 +4,6 @@ Run WASM based code executions in the browser easily
 
 https://user-images.githubusercontent.com/22961671/134069014-7f9beba4-8e10-431a-92a3-6cc0bf35d811.mov
 
-
-
-
 ## Goal of the project
 
 The goal of this project is to build an easy way to execute various programming languages in React via WebAssembly.
