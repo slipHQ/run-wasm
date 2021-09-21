@@ -1,14 +1,11 @@
-/node_modules
+node_modules
 
-/example/node_modules
 /example/build
 
-/example-nextjs/node_modules
 /example-nextjs/build
 /example-nextjs/.next
 
 /lib
 
-
-yarn-debug.log*
-yarn-error.log*
+.eslintcache
+yarn-*.log*
