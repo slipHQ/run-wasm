@@ -35,7 +35,7 @@
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "build": "yarn build:esm && yarn build:cjs",
+    "build": "yarn build:esm && yarn build:cjs && yarn --cwd ./example-nextjs/ build",
     "check-types": "tsc",
     "format": "prettier --write --list-different --ignore-path .gitignore .",
     "lint": "eslint --cache . --ignore-path .gitignore --ignore-pattern 'lib/*'",
