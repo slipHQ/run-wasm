@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { RunWasm, createRunWasmClient, createPythonClient } from 'run-wasm'
+import React, { useState } from 'react'
+import { createPythonClient, RunWasm } from 'run-wasm'
 import './App.css'
+
 declare global {
   // <- [reference](https://stackoverflow.com/a/56458070/11542903)
   interface Window {
@@ -18,16 +19,20 @@ function App() {
     let output = await pythonClient.run({ code })
     setOutput(output)
   }
+
   return (
-    <div className="App">
+    <div className="app">
       <RunWasm language="Python" code={inputCode} />
-      <input
+
+      <textarea
         value={inputCode}
         onChange={(e) => {
           setInputCode(e.target.value)
         }}
+        className="code-editor"
       />
-      <button onClick={() => runCode(inputCode)}></button>
+
+      <button onClick={() => runCode(inputCode)}>Run Code</button>
 
       {output ?? <p>{output}</p>}
     </div>
