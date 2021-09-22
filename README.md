@@ -27,15 +27,15 @@ cd run-wasm
 
 3. Run `yarn build` in the root directory.
 
-   This will build the `run-wasm` package in the `lib` folder and allow you to import it in the `example` project.
+   This will build the `run-wasm` package in the `lib` folder and allow you to import it in the `example-nextjs` project.
 
-4. In the `example` project, run `yarn`.
+4. In the `example-nextjs` project, run `yarn`.
 
 ```
-cd example
+cd example-nextjs
 yarn
 ```
 
-5. Run `yarn start`
+5. Run `yarn dev`
 
    🎉 You should be able to see the component at `localhost:3000`
