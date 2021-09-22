@@ -70,7 +70,6 @@ function App() {
           <button
             className="bg-black text-white my-4 py-1 px-2 rounded-lg "
             onClick={() => runCode(inputCode, pyodide)}
-
           >
             Run Code
           </button>

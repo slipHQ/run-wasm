@@ -18,7 +18,7 @@ function App() {
 
   async function runCode(code: string) {
     let output = await pythonClient.run({ code })
-    setOutput(output)
+    if (output) setOutput(output)
   }
 
   return (
@@ -41,7 +41,7 @@ function App() {
       <Editor
         height="10rem"
         defaultLanguage="python"
-        value={output.toString()}
+        value={output.toString() ?? ''}
         className="code-editor"
         theme="vs-dark"
       />
