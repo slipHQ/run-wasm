@@ -14,8 +14,18 @@ export class RunWasmClient {
 }
 
 export class PythonClient {
+  // <- [reference](https://stackoverflow.com/a/59571016/1375972)
+  // We redirect stdout to an IO string buffer so that it can be read later
+  private readonly setStdoutToOutput = `
+    import sys
+    import io
+    sys.stdout = io.StringIO()
+  `
+
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  public constructor(protected pyodide: any) {}
+  public constructor(protected pyodide: any) {
+    pyodide.runPython(this.setStdoutToOutput)
+  }
 
   private loadPackages(code: string): Promise<any> {
     if (typeof this.pyodide.loadPackagesFromImports === 'function') {
@@ -29,9 +39,11 @@ export class PythonClient {
   public run({ code }: { code: string }): Promise<string> {
     return new Promise((resolve) => {
       const output = this.loadPackages(code).then(() => {
-        const output = this.pyodide.runPython(code)
-        console.log(output)
-        return output
+        const output = this.pyodide.runPython(code) ?? ''
+        // Prepend the value of stdout before returning
+        const stdout = this.pyodide.runPython('sys.stdout.getvalue()')
+        console.log(stdout + output)
+        return stdout + output
       })
       resolve(output)
     })
