@@ -1,0 +1,60 @@
+{
+  "projectName": "run-wasm",
+  "projectOwner": "slipHQ",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "kennethcassel",
+      "name": "kennethcassel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22961671?v=4",
+      "profile": "https://www.slip.so/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "nikolaystrikhar",
+      "name": "Nikolay Strikhar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4025589?v=4",
+      "profile": "https://github.com/nikolaystrikhar",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mcintyre94",
+      "name": "Callum McIntyre",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1711350?v=4",
+      "profile": "https://github.com/mcintyre94",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "bharat-patodi",
+      "name": "Bharat Patodi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16771172?v=4",
+      "profile": "https://github.com/bharat-patodi",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "codingknite",
+      "name": "Joel P. Mugalu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70036189?v=4",
+      "profile": "https://codingknite.com/",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

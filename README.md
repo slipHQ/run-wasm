@@ -39,3 +39,27 @@ yarn
 5. Run `yarn dev`
 
    🎉 You should be able to see the component at `localhost:3000`
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://www.slip.so/"><img src="https://avatars.githubusercontent.com/u/22961671?v=4?s=100" width="100px;" alt=""/><br /><sub><b>kennethcassel</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=kennethcassel" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/nikolaystrikhar"><img src="https://avatars.githubusercontent.com/u/4025589?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nikolay Strikhar</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=nikolaystrikhar" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mcintyre94"><img src="https://avatars.githubusercontent.com/u/1711350?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Callum McIntyre</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=mcintyre94" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/bharat-patodi"><img src="https://avatars.githubusercontent.com/u/16771172?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bharat Patodi</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=bharat-patodi" title="Code">💻</a></td>
+    <td align="center"><a href="https://codingknite.com/"><img src="https://avatars.githubusercontent.com/u/70036189?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Joel P. Mugalu</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=codingknite" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
