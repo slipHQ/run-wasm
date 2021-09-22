@@ -31,6 +31,7 @@ function App() {
         defaultValue={inputCode}
         onChange={(value) => setInputCode(value ?? '')}
         className="code-editor"
+        theme="vs-dark"
       />
 
       <button onClick={() => runCode(inputCode)}>Run Code</button>
@@ -42,6 +43,7 @@ function App() {
         defaultLanguage="python"
         value={output.toString()}
         className="code-editor"
+        theme="vs-dark"
       />
     </div>
   )
