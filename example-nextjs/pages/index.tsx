@@ -21,7 +21,6 @@ function App() {
     console.log('running code', code)
     let pythonClient = createPythonClient(pyodide)
     console.log(pythonClient)
-    pythonClient.run({ code })
     let output = await pythonClient.run({ code })
     setOutput(output)
     console.log('output', output)
@@ -70,7 +69,6 @@ function App() {
           <button
             className="bg-black text-white my-4 py-1 px-2 rounded-lg "
             onClick={() => runCode(inputCode, pyodide)}
-
           >
             Run Code
           </button>
@@ -83,7 +81,7 @@ function App() {
 
           <div className="mt-1">
             <Editor
-              value={output.toString()}
+              value={output?.toString()}
               height="10rem"
               defaultLanguage="python"
               className="bg-gray-900 text-white p-2 w-1/2 shadow-sm focus:ring-gray-500 focus:border-gray-500 block  sm:text-sm border-gray-300 rounded-md"
