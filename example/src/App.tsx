@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { createPythonClient, RunWasm } from 'run-wasm'
+import Editor from '@monaco-editor/react'
 import './App.css'
 
 declare global {
@@ -11,7 +12,7 @@ declare global {
 }
 
 function App() {
-  const [output, setOutput] = useState('loading...')
+  const [output, setOutput] = useState('# loading...')
   const [inputCode, setInputCode] = useState('')
   let pythonClient = createPythonClient(window.pyodide)
 
@@ -24,17 +25,26 @@ function App() {
     <div className="app">
       <RunWasm language="Python" code={inputCode} />
 
-      <textarea
-        value={inputCode}
-        onChange={(e) => {
-          setInputCode(e.target.value)
-        }}
+      <Editor
+        height="25rem"
+        defaultLanguage="python"
+        defaultValue={inputCode}
+        onChange={(value) => setInputCode(value ?? '')}
         className="code-editor"
+        theme="vs-dark"
       />
 
       <button onClick={() => runCode(inputCode)}>Run Code</button>
 
-      {output ?? <p>{output}</p>}
+      <h3 style={{ marginBottom: 0 }}>Output</h3>
+
+      <Editor
+        height="10rem"
+        defaultLanguage="python"
+        value={output.toString()}
+        className="code-editor"
+        theme="vs-dark"
+      />
     </div>
   )
 }

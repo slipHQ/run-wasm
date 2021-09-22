@@ -1,31 +1,22 @@
 .app {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 5rem;
+  padding: 5rem 10rem;
   height: 100vh;
-  text-align: center;
-  background: #e0dede;
 }
 
 .code-editor {
-  height: 15rem;
-  width: 70%;
-  margin-top: 2rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 0.5rem;
-  padding: 1rem;
+  margin-top: 1rem;
 }
 
 button {
   display: inline-block;
-  margin: 2rem 0;
+  margin: 0.5rem 0 2rem 0;
   padding: 0.75rem 4rem;
   cursor: pointer;
-  background: #abadb0;
+  background: #000;
+  color: #fff;
   font-size: 0.9rem;
   font-weight: bold;
   border: none;
-  border-radius: 0.5rem;
 }

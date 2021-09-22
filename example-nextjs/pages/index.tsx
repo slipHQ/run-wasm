@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { RunWasm, createRunWasmClient, createPythonClient } from 'run-wasm'
+import { createPythonClient, RunWasm } from 'run-wasm'
+import Editor from '@monaco-editor/react'
 import Script from 'next/script'
 
 declare global {
@@ -11,7 +12,7 @@ declare global {
 }
 
 function App() {
-  const [output, setOutput] = useState('loading...')
+  const [output, setOutput] = useState('')
   const [inputCode, setInputCode] = useState('')
   const [pyodide, setPyodide] = useState(false)
 
@@ -41,37 +42,49 @@ function App() {
             }}
           />
         </>
+
         <RunWasm language="Python" code={inputCode} />
+
         <div>
-          <label
-            htmlFor="email"
-            className="pt-8 block text-sm font-medium text-gray-700"
-          >
+          <label className="pt-8 block text-sm font-medium text-gray-700">
             Insert Python Code Below
           </label>
+
           <div className="mt-1">
-            <textarea
-              name="Code"
-              id="Code"
+            <Editor
+              height="20rem"
+              defaultLanguage="python"
+              defaultValue={inputCode}
+              onChange={(value) => setInputCode(value ?? '')}
               className="bg-gray-900 text-white p-2 w-1/2 shadow-sm focus:ring-gray-500 focus:border-gray-500 block  sm:text-sm border-gray-300 rounded-md"
-              placeholder="1 + 1"
-              value={inputCode}
-              onChange={(e) => setInputCode(e.target.value)}
+              theme="vs-dark"
             />
           </div>
         </div>
+
         {pyodide && (
           <button
-            className="bg-black text-white my-4 py-1 px-2 rounded-lg "
+            className="bg-black text-white my-4 py-1 px-4 rounded-lg "
             onClick={() => runCode(inputCode, window.pyodide)}
           >
             Run Code
           </button>
         )}
+
         <div>
-          {output ?? (
-            <p className="my-8 text-xl text-gray-900">Output: {output}</p>
-          )}
+          <label className="pt-8 block text-sm font-medium text-gray-700">
+            Output
+          </label>
+
+          <div className="mt-1">
+            <Editor
+              value={output.toString()}
+              height="10rem"
+              defaultLanguage="python"
+              className="bg-gray-900 text-white p-2 w-1/2 shadow-sm focus:ring-gray-500 focus:border-gray-500 block  sm:text-sm border-gray-300 rounded-md"
+              theme="vs-dark"
+            />
+          </div>
         </div>
       </div>
     </div>
