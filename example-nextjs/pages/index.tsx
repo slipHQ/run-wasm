@@ -7,13 +7,14 @@ declare global {
   interface Window {
     pyodide: any
     languagePluginLoader: any
+    loadPyodide: Function
   }
 }
 
 function App() {
   const [output, setOutput] = useState('loading...')
   const [inputCode, setInputCode] = useState('')
-  const [pyodide, setPyodide] = useState(false)
+  const [pyodide, setPyodide] = useState(null)
 
   async function runCode(code: string, pyodide: any) {
     console.log('running code', code)
@@ -35,9 +36,12 @@ function App() {
         {/* Content goes here */}
         <>
           <Script
-            src="https://cdn.jsdelivr.net/pyodide/v0.16.1/full/pyodide.js"
-            onLoad={() => {
-              setPyodide(true)
+            src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"
+            onLoad={async () => {
+              const pyodide = await window.loadPyodide({
+                indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.18.1/full/',
+              })
+              setPyodide(pyodide)
             }}
           />
         </>
@@ -63,7 +67,7 @@ function App() {
         {pyodide && (
           <button
             className="bg-black text-white my-4 py-1 px-2 rounded-lg "
-            onClick={() => runCode(inputCode, window.pyodide)}
+            onClick={() => runCode(inputCode, pyodide)}
           >
             Run Code
           </button>
