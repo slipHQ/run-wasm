@@ -32,6 +32,10 @@ function App() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <a href="https://github.com/slipHQ/run-wasm">
+        <img src="github.png" className="absolute right-5 top-5 h-7" />
+      </a>
+
       <div className="max-w-3xl mx-auto">
         {/* Content goes here */}
         <>
