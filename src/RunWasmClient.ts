@@ -27,25 +27,20 @@ export class PythonClient {
     pyodide.runPython(this.setStdoutToOutput)
   }
 
+  public async run({ code }: { code: string }): Promise<string> {
+    await this.loadPackages(code)
+    const output: string = this.pyodide.runPython(code) ?? ''
+    // Prepend the value of stdout before returning
+    const stdout: string = this.pyodide.runPython('sys.stdout.getvalue()')
+    console.log(stdout + output)
+    return stdout + output
+  }
+
   private loadPackages(code: string): Promise<any> {
     if (typeof this.pyodide.loadPackagesFromImports === 'function') {
       console.log('Loading Python dependencies from code')
       return this.pyodide.loadPackagesFromImports(code)
-    } else {
-      return this.pyodide.loadPackage([])
     }
-  }
-
-  public run({ code }: { code: string }): Promise<string> {
-    return new Promise((resolve) => {
-      const output = this.loadPackages(code).then(() => {
-        const output = this.pyodide.runPython(code) ?? ''
-        // Prepend the value of stdout before returning
-        const stdout = this.pyodide.runPython('sys.stdout.getvalue()')
-        console.log(stdout + output)
-        return stdout + output
-      })
-      resolve(output)
-    })
+    return this.pyodide.loadPackage([])
   }
 }

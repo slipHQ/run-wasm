@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/consistent-function-scoping */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import { RunWasmClient, PythonClient } from './RunWasmClient'
