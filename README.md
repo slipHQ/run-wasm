@@ -1,8 +1,10 @@
+
 # run-wasm
 
 A simple way to run WASM based code executions in the browser.
 
-https://user-images.githubusercontent.com/22961671/134069014-7f9beba4-8e10-431a-92a3-6cc0bf35d811.mov
+<!-- https://user-images.githubusercontent.com/22961671/134069014-7f9beba4-8e10-431a-92a3-6cc0bf35d811.mov -->
+![gif](https://user-images.githubusercontent.com/81442054/134450922-81ebd8eb-fe4d-4d25-9e86-61aed5000f37.gif)
 
 ## Goal of the project
 
