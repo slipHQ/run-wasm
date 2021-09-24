@@ -14,34 +14,6 @@ People should be able to use this project to embed executable code snippets on t
 
 We're building this as a new component to be used inside the [Slip](https://www.slip.so) authoring tool.
 
-## Development Workflow
-
-1. Clone the run-WASM repository and `cd` into it
-
-```
-git clone git@github.com:slipHQ/run-wasm.git
-cd run-wasm
-```
-
-2. Run `yarn` in the root directory.
-
-   This will install all the dependencies defined in the package.json file
-
-3. Run `yarn build` in the root directory.
-
-   This will build the `run-wasm` package in the `lib` folder and allow you to import it in the `example-nextjs` project.
-
-4. In the `example-nextjs` project, run `yarn`.
-
-```
-cd example-nextjs
-yarn
-```
-
-5. Run `yarn dev`
-
-   🎉 You should be able to see the component at `localhost:3000`
-
 ## All Contributors ✨
 
 Thanks goes to these wonderful people.
