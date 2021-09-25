@@ -45,21 +45,22 @@ eratosthenes(100)`)
     console.log(inputCode)
   }, [inputCode])
 
+  // Note that window.loadPyodide comes from the beforeInteractive pyodide.js Script
+  useEffect(() => {
+    window
+      .loadPyodide({
+        indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.18.1/full/',
+      })
+      .then((pyodide) => setPyodide(pyodide))
+  }, [])
+
   return (
     <div className="max-w-4xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        {/* Content goes here */}
-        <>
-          <Script
-            src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"
-            onLoad={async () => {
-              const pyodide = await window.loadPyodide({
-                indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.18.1/full/',
-              })
-              setPyodide(pyodide)
-            }}
-          />
-        </>
+        <Script
+          src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"
+          strategy="beforeInteractive"
+        />
         <main className="mx-auto my-16 max-w-7xl sm:mt-24">
           <div className="text-left">
             <h1 className="text-3xl tracking-tight text-gray-900 sm:text-5xl md:text-5xl">
