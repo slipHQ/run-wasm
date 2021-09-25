@@ -54,7 +54,17 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "jsjoeio",
+      "name": "Joe Previte",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3806031?v=4",
+      "profile": "https://vimforvscode.com",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
