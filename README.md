@@ -1,4 +1,3 @@
-
 # run-wasm
 
 A simple way to run WASM based code executions in the browser.
