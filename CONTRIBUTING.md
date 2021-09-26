@@ -6,7 +6,7 @@ In this guide you will get an overview of the contribution workflow from opening
 
 ## New contributor guide
 
-  See the [README](README.md) to get an overview of the project.
+See the [README](README.md) to get an overview of the project.
 
 ## Getting started
 
@@ -25,6 +25,7 @@ Scan through our [existing issues](https://github.com/slipHQ/run-wasm/issues) to
 #### Prerequisites
 
 Make sure you have the following installed in your development environment:
+
 - [Node](https://nodejs.org/en/download/)
 - [npm](https://nodejs.org/en/download/)
 - [yarn](https://classic.yarnpkg.com/en/docs/install/)
@@ -62,14 +63,13 @@ yarn
 
    🎉 You should be able to see the component at `localhost:3000`
 
-
 ### Pull Request
 
 When you're done making the changes, open a pull request, often referred to as a PR.
+
 - Fill out the PR description summarizing your changes so we can review your PR. This template helps reviewers understand your changes and the purpose of your pull request.
 - Don't forget to [link PR to issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) if you are solving one.
-- Enable the checkbox to [allow maintainer edits](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork) so the branch can be updated for a merge.
-Once you submit your PR, a Docs team member will review your proposal. We may ask questions or request for additional information.
+- Enable the checkbox to [allow maintainer edits](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork) so the branch can be updated for a merge. Once you submit your PR, a Docs team member will review your proposal. We may ask questions or request for additional information.
 - We may ask for changes to be made before a PR can be merged, either using [suggested changes](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/incorporating-feedback-in-your-pull-request) or pull request comments. You can apply suggested changes directly through the UI. You can make any other changes in your fork, then commit them to your branch.
 - As you update your PR and apply changes, mark each conversation as [resolved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/commenting-on-a-pull-request#resolving-conversations).
 - If you run into any merge issues, checkout this [git tutorial](https://lab.github.com/githubtraining/managing-merge-conflicts) to help you resolve merge conflicts and other issues.
@@ -79,4 +79,3 @@ Once you submit your PR, a Docs team member will review your proposal. We may as
 Congratulations :tada::tada: The Slip team thanks you :sparkles:.
 
 Once your PR is merged, we will add you to the All Contributors Table in the [`README.md`](./README.md#all-contributors)
-
