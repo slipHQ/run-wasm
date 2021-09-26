@@ -26,7 +26,7 @@ Thanks goes to these wonderful people.
     <td align="center"><a href="https://github.com/mcintyre94"><img src="https://avatars.githubusercontent.com/u/1711350?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Callum McIntyre</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=mcintyre94" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/bharat-patodi"><img src="https://avatars.githubusercontent.com/u/16771172?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bharat Patodi</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=bharat-patodi" title="Code">💻</a></td>
     <td align="center"><a href="https://codingknite.com/"><img src="https://avatars.githubusercontent.com/u/70036189?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Joel P. Mugalu</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=codingknite" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://vimforvscode.com"><img src="https://avatars.githubusercontent.com/u/3806031?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Joe Previte</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=jsjoeio" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://vimforvscode.com"><img src="https://avatars.githubusercontent.com/u/3806031?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Joe Previte</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=jsjoeio" title="Documentation">📖</a> <a href="https://github.com/slipHQ/run-wasm/commits?author=jsjoeio" title="Code">💻</a></td>
   </tr>
 </table>
 
