@@ -64,6 +64,15 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "ntindle",
+      "name": "Nicholas Tindle",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8845353?v=4",
+      "profile": "https://github.com/ntindle",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
