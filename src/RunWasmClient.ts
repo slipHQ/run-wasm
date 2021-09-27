@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
 /* 
 A client for running arbitrary WASM code.
 */
@@ -42,5 +43,35 @@ export class PythonClient {
       return this.pyodide.loadPackagesFromImports(code)
     }
     return this.pyodide.loadPackage([])
+  }
+}
+
+declare global {
+  interface Console {
+    oldLog: (message?: any, ...optionalParams: any[]) => void
+  }
+}
+
+export class TSClient {
+  // We store the logs here so that we can return them later from the run() method
+  public logs: any = []
+
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  public constructor(protected ts: any) {
+    // Overriding the console.log method so that we can store the logs
+    console.oldLog = console.log
+    console.log = (value) => {
+      // For some reason, the first 'incoming' log is always an instance of TSClient. Ignoring it
+      if (!(value instanceof TSClient)) {
+        this.logs.push(value)
+      }
+    }
+  }
+
+  public async run({ code }: { code: string }): Promise<any[]> {
+    // TODO: Type checking. We are using the transpile method which only does basic syntax checking.
+    // eslint-disable-next-line no-eval
+    eval((await this.ts.transpile(code)) as string)
+    return this.logs
   }
 }
