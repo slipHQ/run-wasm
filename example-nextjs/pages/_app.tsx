@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     //  - This must be an exact match of your domain.
     //  - If you're using www. for your domain, make sure you include that here.
     load('PECJVOQV', {
-      includedDomains: ['runwasm.com'],
+      includedDomains: ['runwasm.com', 'www.runwasm.com'],
     })
 
     function onRouteChangeComplete() {
