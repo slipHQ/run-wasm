@@ -1,70 +1,44 @@
-import React, { useEffect, useState } from 'react'
-import { createPythonClient, RunWasm } from 'run-wasm'
+import React, { useState } from 'react'
+import { createTSClient } from 'run-wasm'
 import Editor from '@monaco-editor/react'
 import Script from 'next/script'
-import GithubButton from '../components/GithubButton'
 import Navbar from '../components/Navbar'
+import GithubButton from '../components/GithubButton'
 
 declare global {
-  // <- [reference](https://stackoverflow.com/a/56458070/11542903)
   interface Window {
-    pyodide: any
-    languagePluginLoader: any
-    loadPyodide: Function
+    ts: any
   }
 }
 
 function App() {
-  const [output, setOutput] = useState('')
-  const [
-    inputCode,
-    setInputCode,
-  ] = useState(`# Implementation of the Sieve of Eratosthenes
-# https://stackoverflow.com/questions/3939660/sieve-of-eratosthenes-finding-primes-python
-  
-# Finds all prime numbers up to n
-def eratosthenes(n):
-    multiples = []
-    for i in range(2, n+1):
-        if i not in multiples:
-            print (i)
-            for j in range(i*i, n+1, i):
-                multiples.append(j)
-  
-eratosthenes(100)`)
-  const [pyodide, setPyodide] = useState(null)
+  const [inputCode, setInputCode] = useState(`// TypeScript code goes here
+let a: number;
+let b: number;
+a = 12;
+b = 3;
+console.log(a + b);`)
+  const [output, setOutput] = useState<Array<string>>([])
 
-  async function runCode(code: string, pyodide: any) {
+  async function runCode(code: string) {
     console.log('running code', code)
-    let pythonClient = createPythonClient(pyodide)
-    console.log(pythonClient)
-    let output = await pythonClient.run({ code })
-    setOutput(output)
-    console.log('output', output)
+    let tsClient = createTSClient(window.ts)
+    console.log(tsClient)
+    const result = await tsClient.run({ code })
+    console.log(result)
+    setOutput(result)
   }
-
-  useEffect(() => {
-    console.log(inputCode)
-  }, [inputCode])
-
-  // Note that window.loadPyodide comes from the beforeInteractive pyodide.js Script
-  useEffect(() => {
-    window
-      .loadPyodide({
-        indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.18.1/full/',
-      })
-      .then((pyodide) => setPyodide(pyodide))
-  }, [])
 
   return (
     <>
-      <Navbar current="Home" />
+      <Navbar current="TypeScript" />
       <div className="max-w-4xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <Script
-            src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"
             strategy="beforeInteractive"
+            src="https://unpkg.com/typescript@latest/lib/typescriptServices.js"
           />
+          <Script src="https://kit.fontawesome.com/137d63e13e.js" />
           <main className="mx-auto my-16 max-w-7xl sm:mt-24">
             <div className="text-left">
               <h1 className="text-3xl tracking-tight text-gray-900 sm:text-5xl md:text-5xl">
@@ -76,39 +50,38 @@ eratosthenes(100)`)
                 <b>run-wasm</b> is an api which allows you to easily execute
                 code via WebAssembly based programming languages. <br />
                 <br /> It allows you to include interactive code examples in
-                your website.
+                your website. <br />
+                <br />
+                This page demonstrates running TypeScript code in the browser.
               </p>
               <GithubButton />
             </div>
           </main>
 
-          {/* <RunWasm language="Python" code={inputCode} /> */}
-
           <div>
             <label className="block pt-8 text-sm font-medium text-gray-700">
-              Insert Python Code Below
+              Insert TypeScript Code Below
             </label>
 
-            <div className="mt-1">
+            <div className="mt-1 px-2">
               <Editor
                 height="20rem"
-                defaultLanguage="python"
+                defaultLanguage="typescript"
                 defaultValue={inputCode}
                 onChange={(value) => setInputCode(value ?? '')}
                 className="block w-1/2 p-2 text-white bg-gray-900 border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 theme="vs-dark"
+                options={{}}
               />
             </div>
           </div>
 
-          {pyodide && (
-            <button
-              className="px-4 py-1 my-4 text-white bg-black rounded "
-              onClick={() => runCode(inputCode, pyodide)}
-            >
-              Run Code
-            </button>
-          )}
+          <button
+            className="px-4 py-1 my-4 text-white bg-black rounded "
+            onClick={() => runCode(inputCode)}
+          >
+            Run Code
+          </button>
 
           <div>
             <label className="block pt-8 text-sm font-medium text-gray-700">
@@ -117,9 +90,9 @@ eratosthenes(100)`)
 
             <div className="mt-1">
               <Editor
-                value={output?.toString()}
+                value={output?.join('\n') ?? ''}
                 height="10rem"
-                defaultLanguage="python"
+                defaultLanguage="typescript"
                 className="block w-1/2 p-2 text-white bg-gray-900 border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 theme="vs-dark"
               />

@@ -1,6 +1,6 @@
 module.exports = {
   extends: 'galex',
-  ignorePatterns: ['example-nextjs'],
+  ignorePatterns: ['example-nextjs', '__tests__'],
   rules: {
     'new-cap': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
