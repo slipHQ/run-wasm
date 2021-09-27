@@ -13,6 +13,11 @@ export default function Navbar({ current }) {
       href: '/matplotlib',
       current: current === 'Matplotlib',
     },
+    {
+      name: 'TypeScript',
+      href: '/ts',
+      current: current === 'TypeScript',
+    },
   ]
 
   return (
