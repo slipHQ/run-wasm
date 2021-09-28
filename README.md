@@ -48,7 +48,7 @@ Thanks goes to these wonderful people.
   </tr>
   <tr>
     <td align="center"><a href="http://dhaiwat.com"><img src="https://avatars.githubusercontent.com/u/39617427?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dhaiwat Pandya</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=Dhaiwat10" title="Code">💻</a></td>
-
+    <td align="center"><a href="https://github.com/allstargaurav"><img src="https://avatars.githubusercontent.com/u/24932097?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gaurav</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=allstargaurav" title="Code">💻</a></td>
   </tr>
 </table>
 
