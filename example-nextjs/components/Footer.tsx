@@ -40,10 +40,13 @@ export default function Footer() {
             </a>
           ))}
         </div>
-        <div className="mt-8 md:mt-0 md:order-1">
-          <p className="text-base text-center text-gray-400">
-            <p className="text-base text-center text-gray-400">
-              Made with ♥︎ by <a href="https://www.slip.so">Slip</a>
+        <div className="mt-8 text-gray-400 md:mt-0 md:order-1">
+          <p className="text-base text-center ">
+            <p className="text-base text-center">
+              Made with ♥︎ by{' '}
+              <a href="https://www.slip.so" className="font-bold">
+                Slip
+              </a>
             </p>
           </p>
         </div>
