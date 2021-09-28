@@ -46,7 +46,7 @@ console.log(a + b);`)
                   Embed executable code snippets on your site
                 </span>
               </h1>
-              <p className="max-w-md mx-auto mt-4 text-base text-gray-500 sm:text-lg md:mt-16 md:text-xl md:max-w-3xl">
+              <p className="max-w-md mt-4 text-base text-gray-500 md:mx-auto sm:text-lg md:mt-16 md:text-xl md:max-w-3xl">
                 <b>run-wasm</b> is an api which allows you to easily execute
                 code via WebAssembly based programming languages. <br />
                 <br /> It allows you to include interactive code examples in
@@ -63,7 +63,7 @@ console.log(a + b);`)
               Insert TypeScript Code Below
             </label>
 
-            <div className="mt-1 px-2">
+            <div className="mt-1 ">
               <Editor
                 height="20rem"
                 defaultLanguage="typescript"
@@ -77,7 +77,7 @@ console.log(a + b);`)
           </div>
 
           <button
-            className="px-4 py-1 my-4 text-white bg-black rounded "
+            className="px-4 py-2 my-4 text-white transition-colors bg-black border border-transparent rounded hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900 focus:outline-none"
             onClick={() => runCode(inputCode)}
           >
             Run Code
