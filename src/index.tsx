@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import { RunWasmClient, PythonClient, TSClient } from './RunWasmClient'
+import {
+  RunWasmClient,
+  PythonClient,
+  TSClient,
+  PHPClient,
+} from './RunWasmClient'
 
 declare global {
   // <- [reference](https://stackoverflow.com/a/56458070/11542903)
@@ -40,4 +45,15 @@ const createTSClient = (ts: any): TSClient => {
   return new TSClient(ts)
 }
 
-export { RunWasm, createRunWasmClient, createPythonClient, createTSClient }
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+const createPHPClient = (php: any): PHPClient => {
+  return new PHPClient(php)
+}
+
+export {
+  RunWasm,
+  createRunWasmClient,
+  createPythonClient,
+  createTSClient,
+  createPHPClient,
+}

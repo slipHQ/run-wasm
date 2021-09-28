@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console */
-/* 
+/*
 A client for running arbitrary WASM code.
 */
 
@@ -72,6 +72,37 @@ export class TSClient {
     // TODO: Type checking. We are using the transpile method which only does basic syntax checking.
     // eslint-disable-next-line no-eval
     eval((await this.ts.transpile(code)) as string)
+    return this.logs
+  }
+}
+
+export class PHPClient {
+  // We store the logs here so that we can return them later from the run() method
+  protected logs: any = []
+
+  protected log: any
+
+  protected logHandler: any
+
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  public constructor(protected php: any) {
+    // eslint-disable-next-line func-names
+    this.log = function (event: any): void {
+      this.logs.push(event.detail)
+    }
+
+    this.logHandler = this.log.bind(this)
+
+    this.php.addEventListener('output', this.logHandler)
+  }
+
+  public async run({ code }: { code: string }): Promise<any[]> {
+    this.php.refresh()
+
+    await this.php.run(code)
+
+    this.php.removeEventListener('output', this.logHandler)
+
     return this.logs
   }
 }

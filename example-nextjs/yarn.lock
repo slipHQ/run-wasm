@@ -2669,6 +2669,11 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+php-wasm@^0.0.4-a:
+  version "0.0.4-a"
+  resolved "https://registry.yarnpkg.com/php-wasm/-/php-wasm-0.0.4-a.tgz#a4288b57145cfef03793ef2e71c25d89b24bf170"
+  integrity sha512-rPK1Nu16v615msEavVgklg4cAKM35ApgcsjJPtvBR4WGF040ggVBhR3tgi1WRsVMfrWxuC3U5J8bDUVXaUxJUg==
+
 picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.3:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.0.tgz#f1f061de8f6a4bf022892e2d128234fb98302972"

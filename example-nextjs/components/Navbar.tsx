@@ -18,6 +18,11 @@ export default function Navbar({ current }) {
       href: '/ts',
       current: current === 'TypeScript',
     },
+    {
+      name: 'PHP',
+      href: '/php',
+      current: current === 'PHP',
+    },
   ]
 
   return (
