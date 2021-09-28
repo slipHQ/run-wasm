@@ -1,5 +1,4 @@
 import '../styles/globals.css'
-import 'tailwindcss/tailwind.css'
 import { load, trackPageview } from 'fathom-client'
 import { useRouter } from 'next/router'
 import type { AppProps } from 'next/app'
