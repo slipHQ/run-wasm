@@ -1,25 +1,18 @@
-
 <p align="center">
 <a href="https://www.runwasm.com">
 <img src="https://user-images.githubusercontent.com/22961671/135009624-47470419-7e17-47b5-99ed-0f15b8123dd0.png" width=600 />
   </a>
 </p>
 
-
-
 # run-wasm
 
-
-[run-wasm](https://www.runwasm.com) is an easy to use tool for running WASM based code executions in the browser. 
-
-
+[run-wasm](https://www.runwasm.com) is an easy to use tool for running WASM based code executions in the browser.
 
 Brought to you by [Slip](https://www.slip.so) and our amazing OSS contributors.
 
 <p align="center">
 <img src="./assets/demo.gif" width=600 />
 </p>
-
 
 ## Goal of the project
 
