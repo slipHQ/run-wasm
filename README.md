@@ -1,12 +1,18 @@
 # run-wasm
+<p align="center">
+<a href="https://www.runwasm.com">
+<img src="https://user-images.githubusercontent.com/22961671/135009624-47470419-7e17-47b5-99ed-0f15b8123dd0.png" width=600 />
+  </a>
+</p>
 
-A simple way to run WASM based code executions in the browser.
+
+A simple way to run WASM based code executions in the browser. Brought to you by [Slip](https://www.slip.so) and our amazing OSS contributors.
 
 ![gif](./assets/demo.gif)
 
 ## Goal of the project
 
-The goal of this project is to build an easy way to execute various programming languages in React via WebAssembly.
+The goal of this project is to build an easy way to execute various programming languages in the browser via WebAssembly.
 
 People should be able to use this project to embed executable code snippets on their websites easily!
 
