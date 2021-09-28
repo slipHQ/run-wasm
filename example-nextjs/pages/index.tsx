@@ -4,7 +4,6 @@ import Editor from '@monaco-editor/react'
 import Script from 'next/script'
 import GithubButton from '../components/GithubButton'
 import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 
 declare global {
   // <- [reference](https://stackoverflow.com/a/56458070/11542903)
@@ -22,7 +21,7 @@ function App() {
     setInputCode,
   ] = useState(`# Implementation of the Sieve of Eratosthenes
 # https://stackoverflow.com/questions/3939660/sieve-of-eratosthenes-finding-primes-python
-  
+
 # Finds all prime numbers up to n
 def eratosthenes(n):
     multiples = []
@@ -31,7 +30,7 @@ def eratosthenes(n):
             print (i)
             for j in range(i*i, n+1, i):
                 multiples.append(j)
-  
+
 eratosthenes(100)`)
   const [pyodide, setPyodide] = useState(null)
 
@@ -73,7 +72,7 @@ eratosthenes(100)`)
                   Embed executable code snippets on your site
                 </span>
               </h1>
-              <p className="max-w-md mx-auto mt-4 text-base text-gray-500 sm:text-lg md:mt-16 md:text-xl md:max-w-3xl">
+              <p className="max-w-md mt-4 text-base text-gray-500 md:mx-auto sm:text-lg md:mt-16 md:text-xl md:max-w-3xl">
                 <b>run-wasm</b> is an api which allows you to easily execute
                 code via WebAssembly based programming languages. <br />
                 <br /> It allows you to include interactive code examples in
@@ -104,7 +103,7 @@ eratosthenes(100)`)
 
           {pyodide && (
             <button
-              className="px-4 py-1 my-4 text-white bg-black rounded "
+              className="px-4 py-2 my-4 text-white transition-colors bg-black border border-transparent rounded hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900 focus:outline-none"
               onClick={() => runCode(inputCode, pyodide)}
             >
               Run Code
@@ -128,7 +127,6 @@ eratosthenes(100)`)
           </div>
         </div>
       </div>
-      <Footer />
     </>
   )
 }
