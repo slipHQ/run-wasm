@@ -4,6 +4,7 @@ import Editor from '@monaco-editor/react'
 import Script from 'next/script'
 import GithubButton from '../components/GithubButton'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 declare global {
   // <- [reference](https://stackoverflow.com/a/56458070/11542903)
@@ -65,7 +66,7 @@ eratosthenes(100)`)
             src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"
             strategy="beforeInteractive"
           />
-          <main className="mx-auto my-16 max-w-7xl sm:mt-24">
+          <main className="mx-auto mb-12 max-w-7xl sm:mt-12">
             <div className="text-left">
               <h1 className="text-3xl tracking-tight text-gray-900 sm:text-5xl md:text-5xl">
                 <span className="block font-mono xl:inline">
@@ -127,6 +128,7 @@ eratosthenes(100)`)
           </div>
         </div>
       </div>
+      <Footer />
     </>
   )
 }
