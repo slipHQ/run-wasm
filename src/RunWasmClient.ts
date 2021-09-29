@@ -68,10 +68,61 @@ export class TSClient {
     }
   }
 
-  public async run({ code }: { code: string }): Promise<any[]> {
-    // TODO: Type checking. We are using the transpile method which only does basic syntax checking.
-    // eslint-disable-next-line no-eval
-    eval((await this.ts.transpile(code)) as string)
-    return this.logs
+  public async run({
+    code,
+  }: {
+    code: string
+  }): Promise<{ errors: string[]; output: string[] }> {
+    const typeErrors = getTSTypeErrors(code, this.ts)
+
+    if (typeErrors.length === 0) {
+      // If there are no errors, we can run the code
+
+      // eslint-disable-next-line no-eval
+      eval((await this.ts.transpile(code)) as string)
+    }
+
+    return { errors: typeErrors, output: this.logs }
   }
+}
+
+function getTSTypeErrors(code: string, ts: any): string[] {
+  const dummyFilePath = '/file.ts'
+  const textAst = ts.createSourceFile(
+    dummyFilePath,
+    code,
+    ts.ScriptTarget.Latest
+  )
+  const options = {}
+  const host = {
+    fileExists: (filePath: string) => filePath === dummyFilePath,
+    directoryExists: (dirPath: string) => dirPath === '/',
+    getCurrentDirectory: () => '/',
+    getDirectories: () => [],
+    getCanonicalFileName: (fileName: any) => fileName,
+    getNewLine: () => '\n',
+    getDefaultLibFileName: () => '',
+    getSourceFile: (filePath: string) =>
+      filePath === dummyFilePath ? textAst : undefined,
+    readFile: (filePath: string) =>
+      filePath === dummyFilePath ? code : undefined,
+    useCaseSensitiveFileNames: () => true,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    writeFile: () => {},
+  }
+  const program = ts.createProgram({
+    options,
+    rootNames: [dummyFilePath],
+    host,
+  })
+
+  return ts
+    .getPreEmitDiagnostics(program)
+    .filter((d: { file: any }) => d.file)
+    .filter(
+      (d: { messageText: string }) =>
+        // Ignoring an error that says that console is not in scope (more about it here: https://stackoverflow.com/a/53764522 (check the imperfect example section))
+        !d.messageText.startsWith("Cannot find name 'console'")
+    )
+    .map((d: { messageText: string }) => d.messageText)
 }
