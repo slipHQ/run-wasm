@@ -19,14 +19,13 @@ a = 12;
 b = 3;
 console.log(a + b);`)
   const [output, setOutput] = useState<Array<string>>([])
+  const [errors, setErrors] = useState<Array<string>>([])
 
   async function runCode(code: string) {
-    console.log('running code', code)
     let tsClient = createTSClient(window.ts)
-    console.log(tsClient)
-    const result = await tsClient.run({ code })
-    console.log(result)
+    const { errors: err, output: result } = await tsClient.run({ code })
     setOutput(result)
+    setErrors(err)
   }
 
   return (
@@ -83,6 +82,19 @@ console.log(a + b);`)
             Run Code
           </button>
 
+          {errors.length > 0 && (
+            <div>
+              <label className="block pt-8 text-sm font-medium text-gray-700">
+                Errors
+              </label>
+              {errors.map((error, index) => (
+                <div key={index} className="mt-1">
+                  <p className="text-sm text-red-500">{error}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
           <div>
             <label className="block pt-8 text-sm font-medium text-gray-700">
               Output
@@ -92,7 +104,7 @@ console.log(a + b);`)
               <Editor
                 value={output?.join('\n') ?? ''}
                 height="10rem"
-                defaultLanguage="typescript"
+                defaultLanguage="markdown"
                 className="block w-1/2 p-2 text-white bg-gray-900 border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 theme="vs-dark"
               />
