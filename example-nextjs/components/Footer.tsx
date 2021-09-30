@@ -33,14 +33,14 @@ export default function Footer() {
             <a
               key={item.name}
               href={item.href}
-              className="text-gray-400 hover:text-gray-500"
+              className="text-gray-400 dark:text-gray-450 hover:text-gray-500"
             >
               <span className="sr-only">{item.name}</span>
               <item.icon className="w-6 h-6" aria-hidden="true" />
             </a>
           ))}
         </div>
-        <div className="mt-8 text-gray-400 md:mt-0 md:order-1">
+        <div className="mt-8 text-gray-400 dark:text-gray-450 md:mt-0 md:order-1">
           <p className="text-base text-center ">
             <p className="text-base text-center">
               Made with ♥︎ by{' '}

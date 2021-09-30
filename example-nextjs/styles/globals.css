@@ -8,3 +8,11 @@
 h1 {
   font-family: 'Plus Jakarta Text', sans-serif;
 }
+
+body.dark {
+  @apply bg-gray-875;
+}
+
+.dark button.matplotlib-toolbar-button {
+  @apply text-white bg-gray-750 hover:bg-gray-825 border-gray-825 focus:ring-offset-gray-450 focus:ring-gray-825;
+}

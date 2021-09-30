@@ -4,7 +4,7 @@ export default function GithubButton() {
       <div className="">
         <a
           href="https://github.com/slipHQ/run-wasm"
-          className="flex items-center justify-center w-full px-6 py-2 text-base font-medium text-white transition-colors bg-gray-900 border border-transparent rounded-md hover:bg-gray-700 md:py-2 md:text-md md:px-6 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900 focus:outline-none"
+          className="flex items-center justify-center w-full px-6 py-2 text-base font-medium text-white transition-colors bg-gray-900 dark:bg-gray-750 border border-transparent rounded-md hover:bg-gray-700 dark:hover:bg-gray-825 md:py-2 md:text-md md:px-6 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-450 focus:ring-gray-900 dark:focus:ring-gray-825 focus:outline-none"
         >
           <svg
             width="1024"
