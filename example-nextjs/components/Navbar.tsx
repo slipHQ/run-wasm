@@ -25,7 +25,7 @@ export default function Navbar({ current }) {
   ]
 
   return (
-    <div className="bg-white dark:bg-gray-825 shadow">
+    <div className="bg-white shadow dark:bg-gray-825">
       <Disclosure as="nav" className="mx-auto max-w-7xl">
         {({ open }) => (
           <>
@@ -42,8 +42,8 @@ export default function Navbar({ current }) {
                         href={item.href}
                         className={classNames(
                           item.current
-                            ? 'border-gray-500 dark:border-gray-450 text-gray-900 dark:text-white'
-                            : 'border-transparent text-gray-500 dark:text-gray-450 hover:border-gray-300 dark:hover:border-gray-750 hover:text-gray-700 dark:hover:text-white',
+                            ? 'border-gray-500 dark:border-purple-400 text-gray-900 dark:text-white'
+                            : 'border-transparent text-gray-500 dark:text-gray-450 hover:border-gray-300 dark:hover:border-purple-300 hover:text-gray-700 dark:hover:text-white',
                           'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}
@@ -52,7 +52,9 @@ export default function Navbar({ current }) {
                       </a>
                     ))}
                     <button
-                      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+                      onClick={() =>
+                        setTheme(theme === 'light' ? 'dark' : 'light')
+                      }
                       className={
                         'rounded-full self-center flex items-center justify-center h-8 w-8 bg-white shadow-inner border border-gray-100 capitalize'
                       }
@@ -60,7 +62,7 @@ export default function Navbar({ current }) {
                       {theme === 'dark' ? (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
+                          className="w-5 h-5"
                           viewBox="0 0 20 20"
                           fill="currentColor"
                         >
@@ -73,7 +75,7 @@ export default function Navbar({ current }) {
                       ) : (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
+                          className="w-5 h-5"
                           viewBox="0 0 20 20"
                           fill="currentColor"
                         >

@@ -59,7 +59,7 @@ eratosthenes(100)`)
   return (
     <>
       <Navbar current="Home" />
-      <div className="max-w-4xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+      <div className="max-w-4xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <Script
             src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"
@@ -85,29 +85,41 @@ eratosthenes(100)`)
           {/* <RunWasm language="Python" code={inputCode} /> */}
 
           <div>
-            <label className="block pt-8 text-sm font-medium text-gray-700 dark:text-gray-450">
-              Insert Python Code Below
+            <label className="block pb-4 text-sm font-medium text-gray-700 dark:text-gray-450">
+              Python
             </label>
 
-            <div className="mt-1 dark:text-gray-450">
-              <Editor
-                height="20rem"
-                defaultLanguage="python"
-                defaultValue={inputCode}
-                onChange={(value) => setInputCode(value ?? '')}
-                className="block w-1/2 p-2 text-white bg-gray-900 dark:bg-gray-750 border-gray-300 dark:border-gray-450 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
-                theme="vs-dark"
-              />
+            <div className="mt-1 ">
+              <div className="relative group">
+                <div className="absolute -inset-0.5 dark:bg-gradient-to-r from-indigo-300 to-purple-400 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt" />
+                <Editor
+                  height="20rem"
+                  defaultLanguage="python"
+                  defaultValue={inputCode}
+                  onChange={(value) => setInputCode(value ?? '')}
+                  className="block w-1/2  text-white bg-gray-900 border-gray-300 rounded-lg   shadow-sm p-0.5 border   dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                  theme="vs-dark"
+                  options={{ fontSize: 12 }}
+                />
+              </div>
             </div>
           </div>
 
           {pyodide && (
-            <button
-              className="px-4 py-2 my-4 text-white transition-colors bg-black dark:bg-gray-750 border border-transparent rounded hover:bg-gray-700 dark:hover:bg-gray-825 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-450 focus:ring-gray-900 dark:focus:ring-gray-825 focus:outline-none"
-              onClick={() => runCode(inputCode, pyodide)}
-            >
-              Run Code
-            </button>
+            <div className="pt-8 ">
+              <div className="grid items-start justify-left">
+                <div className="relative group">
+                  <button
+                    className="relative flex items-center py-4 leading-none bg-black divide-x divide-gray-600 rounded-lg px-7"
+                    onClick={() => runCode(inputCode, pyodide)}
+                  >
+                    <span className="text-gray-100 transition duration-200 group-hover:text-gray-100">
+                      Run Code →
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
           )}
 
           <div>
@@ -116,14 +128,17 @@ eratosthenes(100)`)
             </label>
 
             <div className="mt-1 dark:text-gray-450">
-              <Editor
-                value={output?.toString()}
-                height="10rem"
-                defaultLanguage="python"
-                className="block w-1/2 p-2 text-white bg-gray-900 dark:bg-gray-750 border-gray-300 dark:border-gray-450 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
-                theme="vs-dark"
-                options={{ readOnly: true }}
-              />
+              <div className="relative group">
+                <div className="absolute -inset-0.5 dark:bg-gradient-to-r from-indigo-300 to-purple-400 rounded-lg blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt" />
+                <Editor
+                  value={output?.toString()}
+                  height="20rem"
+                  defaultLanguage="python"
+                  className="block w-1/2  text-white bg-gray-900 border-gray-300 rounded-lg   shadow-sm p-0.5 border   dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                  theme="vs-dark"
+                  options={{ readOnly: true }}
+                />
+              </div>
             </div>
           </div>
         </div>
