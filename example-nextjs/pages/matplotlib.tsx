@@ -75,7 +75,7 @@ f.canvas.create_root_element = get_render_element.__get__(
   return (
     <>
       <Navbar current="Matplotlib" />
-      <div className="max-w-4xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+      <div className="max-w-4xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <Script
             src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"
@@ -103,8 +103,8 @@ f.canvas.create_root_element = get_render_element.__get__(
           </main>
 
           <div>
-            <label className="block pt-8 text-sm font-medium text-gray-700 dark:text-gray-450">
-              Insert Python Code Below
+            <label className="block pb-4 text-sm font-medium text-gray-700 dark:text-gray-450">
+              Python
             </label>
 
             <div className="mt-1 dark:text-gray-450">
@@ -113,9 +113,9 @@ f.canvas.create_root_element = get_render_element.__get__(
                 defaultLanguage="python"
                 defaultValue={inputCode}
                 onChange={(value) => setInputCode(value ?? '')}
-                className="block w-1/2 p-2 text-white bg-gray-900 dark:bg-gray-750 border-gray-300 dark:border-gray-450 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                className="block w-1/2  text-white bg-gray-900 border-gray-300 rounded-lg   shadow-sm p-0.5 border   dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 theme="vs-dark"
-                options={{}}
+                options={{ fontSize: 12 }}
               />
             </div>
           </div>
@@ -127,12 +127,20 @@ f.canvas.create_root_element = get_render_element.__get__(
           )}
 
           {pyodide && (
-            <button
-              className="px-4 py-2 my-4 text-white transition-colors bg-black dark:bg-gray-750 border border-transparent rounded hover:bg-gray-700 dark:hover:bg-gray-825 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-450 focus:ring-gray-900 dark:focus:ring-gray-825 focus:outline-none"
-              onClick={() => runCode(inputCode, pyodide)}
-            >
-              Run Code
-            </button>
+            <div className="pt-8 ">
+              <div className="grid items-start justify-left">
+                <div className="relative group">
+                  <button
+                    className="relative flex items-center py-4 leading-none bg-black divide-x divide-gray-600 rounded-lg px-7"
+                    onClick={() => runCode(inputCode, pyodide)}
+                  >
+                    <span className="text-gray-100 transition duration-200 group-hover:text-gray-100">
+                      Run Code →
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
           )}
 
           <div id="plot" />
