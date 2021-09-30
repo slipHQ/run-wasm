@@ -122,6 +122,7 @@ eratosthenes(100)`)
                 defaultLanguage="python"
                 className="block w-1/2 p-2 text-white bg-gray-900 border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 theme="vs-dark"
+                options={{ readOnly: true }}
               />
             </div>
           </div>
