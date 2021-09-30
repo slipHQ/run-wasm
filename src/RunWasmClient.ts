@@ -151,10 +151,5 @@ function getTSTypeErrors(code: string, ts: any, libData: any[]): string[] {
   return ts
     .getPreEmitDiagnostics(program)
     .filter((d: { file: any }) => d.file)
-    .filter(
-      (d: { messageText: string }) =>
-        // Ignoring an error that says that console is not in scope (more about it here: https://stackoverflow.com/a/53764522 (check the imperfect example section))
-        !d.messageText.startsWith("Cannot find name 'console'")
-    )
     .map((d: { messageText: string }) => d.messageText)
 }
