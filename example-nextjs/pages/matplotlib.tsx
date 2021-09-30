@@ -108,18 +108,15 @@ f.canvas.create_root_element = get_render_element.__get__(
             </label>
 
             <div className="mt-1 dark:text-gray-450">
-              <div className="relative group">
-                <div className="absolute -inset-0.5 dark:bg-gradient-to-r from-indigo-300 to-purple-400 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt" />
-                <Editor
-                  height="20rem"
-                  defaultLanguage="python"
-                  defaultValue={inputCode}
-                  onChange={(value) => setInputCode(value ?? '')}
-                  className="block w-1/2  text-white bg-gray-900 border-gray-300 rounded-lg   shadow-sm p-0.5 border   dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
-                  theme="vs-dark"
-                  options={{ fontSize: 12 }}
-                />
-              </div>
+              <Editor
+                height="20rem"
+                defaultLanguage="python"
+                defaultValue={inputCode}
+                onChange={(value) => setInputCode(value ?? '')}
+                className="block w-1/2  text-white bg-gray-900 border-gray-300 rounded-lg   shadow-sm p-0.5 border   dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                theme="vs-dark"
+                options={{ fontSize: 12 }}
+              />
             </div>
           </div>
 
