@@ -56,7 +56,7 @@ export class TSClient {
   // We store the logs here so that we can return them later from the run() method
   public logs: any = []
 
-  private readonly libData: any
+  private libData: any
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   public constructor(protected ts: any) {
@@ -68,29 +68,29 @@ export class TSClient {
         this.logs.push(value)
       }
     }
+  }
 
-    const libs: string[] = ['es5', 'dom']
+  public fetchLibs(libs: string[]): void {
+    this.libData = Promise.all(
+      libs.map(async (lib: string) => {
+        const path = `typescript/lib/lib.${lib}.d.ts`
+        const content = await fetch(
+          `https://cdn.jsdelivr.net/npm/typescript@4.4.3/lib/lib.${lib}.d.ts`
+        )
+          .then((res) => res.text())
+          .catch(() => console.log('Failed to load lib: ' + lib))
 
-    const fetchLibs = async (libs: string[]) => {
-      return Promise.all(
-        libs.map(async (lib: string) => {
-          const path = `typescript/lib/lib.${lib}.d.ts`
-          const content = await fetch(
-            `https://cdn.jsdelivr.net/npm/typescript@4.4.3/lib/lib.${lib}.d.ts`
-          )
-            .then((res) => res.text())
-            .catch(() => console.log('Failed to load lib: ' + lib))
-
-          return {
+        return {
+          path,
+          content,
+          ast: this.ts.createSourceFile(
             path,
             content,
-            ast: ts.createSourceFile(path, content, ts.ScriptTarget.Latest),
-          }
-        })
-      ).then((libs) => libs)
-    }
-
-    this.libData = fetchLibs(libs)
+            this.ts.ScriptTarget.Latest
+          ),
+        }
+      })
+    ).then((lib) => lib)
   }
 
   public async run({
@@ -98,6 +98,7 @@ export class TSClient {
   }: {
     code: string
   }): Promise<{ errors: string[]; output: string[] }> {
+    // The first time we run code, the fetch request for the lib data may still be pending.
     const libData = await this.libData
     const typeErrors = getTSTypeErrors(code, this.ts, libData)
     if (typeErrors.length === 0) {
