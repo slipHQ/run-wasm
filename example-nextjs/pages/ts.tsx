@@ -4,6 +4,7 @@ import Editor from '@monaco-editor/react'
 import Script from 'next/script'
 import Navbar from '../components/Navbar'
 import GithubButton from '../components/GithubButton'
+import { runMethodOnCtrlEnterOrCmdEnterKeyPress } from '../utils'
 
 declare global {
   interface Window {
@@ -33,6 +34,19 @@ console.log(a + b);`)
     setOutput(result)
     setErrors(err)
   }
+
+  useEffect(() => {
+    if (tsClient) {
+      window.addEventListener('keypress', (e) =>
+        runMethodOnCtrlEnterOrCmdEnterKeyPress(e, () => runCode(inputCode))
+      )
+      return () => {
+        window.removeEventListener('keypress', (e) =>
+          runMethodOnCtrlEnterOrCmdEnterKeyPress(e, () => runCode(inputCode))
+        )
+      }
+    }
+  }, [tsClient])
 
   return (
     <>

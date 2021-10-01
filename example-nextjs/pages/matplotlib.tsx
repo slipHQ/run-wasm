@@ -4,6 +4,7 @@ import Editor from '@monaco-editor/react'
 import Script from 'next/script'
 import Navbar from '../components/Navbar'
 import GithubButton from '../components/GithubButton'
+import { runMethodOnCtrlEnterOrCmdEnterKeyPress } from '../utils'
 
 declare global {
   // <- [reference](https://stackoverflow.com/a/56458070/11542903)
@@ -71,6 +72,23 @@ f.canvas.create_root_element = get_render_element.__get__(
       })
       .then((pyodide) => setPyodide(pyodide))
   }, [])
+
+  useEffect(() => {
+    if (pyodide) {
+      window.addEventListener('keypress', (e) =>
+        runMethodOnCtrlEnterOrCmdEnterKeyPress(e, () =>
+          runCode(inputCode, pyodide)
+        )
+      )
+      return () => {
+        window.removeEventListener('keypress', (e) =>
+          runMethodOnCtrlEnterOrCmdEnterKeyPress(e, () =>
+            runCode(inputCode, pyodide)
+          )
+        )
+      }
+    }
+  }, [pyodide])
 
   return (
     <>
