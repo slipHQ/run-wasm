@@ -70,7 +70,7 @@ export class TSClient {
     }
   }
 
-  public fetchLibs(libs: string[]): void {
+  public async fetchLibs(libs: string[]): Promise<void> {
     this.libData = Promise.all(
       libs.map(async (lib: string) => {
         const path = `typescript/lib/lib.${lib}.d.ts`
@@ -120,7 +120,7 @@ function getTSTypeErrors(code: string, ts: any, libData: any[]): string[] {
     ts.ScriptTarget.Latest
   )
   const options = {
-    lib: ['es5', 'dom'],
+    lib: [...libData],
   }
 
   const host = {

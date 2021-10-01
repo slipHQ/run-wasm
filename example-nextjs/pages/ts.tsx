@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createTSClient } from 'run-wasm'
 import Editor from '@monaco-editor/react'
 import Script from 'next/script'
@@ -20,9 +20,14 @@ b = 3;
 console.log(a + b);`)
   const [output, setOutput] = useState<Array<string>>([])
   const [errors, setErrors] = useState<Array<string>>([])
+  const [tsClient, setTsClient] = useState<any>(null)
+
+  useEffect(() => {
+    const tsClient = createTSClient(window.ts)
+    tsClient.fetchLibs(['es5', 'dom']).then(() => setTsClient(tsClient))
+  }, [])
 
   async function runCode(code: string) {
-    let tsClient = createTSClient(window.ts)
     const { errors: err, output: result } = await tsClient.run({ code })
     setOutput(result)
     setErrors(err)
