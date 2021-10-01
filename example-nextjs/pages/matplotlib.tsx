@@ -4,6 +4,7 @@ import Editor, { useMonaco } from '@monaco-editor/react'
 import Script from 'next/script'
 import Navbar from '../components/Navbar'
 import GithubButton from '../components/GithubButton'
+import { addKeyBinding, CustomKeyBinding } from '../utils'
 
 declare global {
   // <- [reference](https://stackoverflow.com/a/56458070/11542903)
@@ -79,21 +80,13 @@ f.canvas.create_root_element = get_render_element.__get__(
     editorRef.current = editor
   }
 
-  const addKeyBinding = (
-    label: string,
-    keybinding: any,
-    callback: () => void
-  ) => {
-    editorRef?.current?.addAction({
-      id: 'label',
-      label,
-      keybindings: [keybinding],
-      precondition:
-        '!suggestWidgetVisible && !markersNavigationVisible && !findWidgetVisible',
-      run: callback,
-    })
+  const runCodeBinding: CustomKeyBinding = {
+    label: 'run',
+    keybinding: CtrlEnter,
+    callback: async () => runCode(inputCode, pyodide),
+    editorRef,
   }
-  addKeyBinding('run', CtrlEnter, async () => runCode(inputCode, pyodide))
+  addKeyBinding(runCodeBinding)
 
   return (
     <>
