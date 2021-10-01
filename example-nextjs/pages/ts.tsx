@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { createTSClient } from 'run-wasm'
-import Editor from '@monaco-editor/react'
+import Editor, { useMonaco } from '@monaco-editor/react'
 import Script from 'next/script'
 import Navbar from '../components/Navbar'
 import GithubButton from '../components/GithubButton'
-import { runMethodOnCtrlEnterOrCmdEnterKeyPress } from '../utils'
 
 declare global {
   interface Window {
@@ -22,6 +21,9 @@ console.log(a + b);`)
   const [output, setOutput] = useState<Array<string>>([])
   const [errors, setErrors] = useState<Array<string>>([])
   const [tsClient, setTsClient] = useState<any>(null)
+  const monaco = useMonaco()
+  const editorRef = useRef(null)
+  const CtrlEnter = monaco?.KeyMod?.CtrlCmd | monaco?.KeyCode?.Enter
 
   useEffect(() => {
     const tsClient = createTSClient(window.ts)
@@ -34,18 +36,25 @@ console.log(a + b);`)
     setErrors(err)
   }
 
-  useEffect(() => {
-    if (tsClient) {
-      window.addEventListener('keypress', (e) =>
-        runMethodOnCtrlEnterOrCmdEnterKeyPress(e, () => runCode(inputCode))
-      )
-      return () => {
-        window.removeEventListener('keypress', (e) =>
-          runMethodOnCtrlEnterOrCmdEnterKeyPress(e, () => runCode(inputCode))
-        )
-      }
-    }
-  }, [tsClient])
+  function handleEditorDidMount(editor) {
+    editorRef.current = editor
+  }
+
+  const addKeyBinding = (
+    label: string,
+    keybinding: any,
+    callback: () => void
+  ) => {
+    editorRef?.current?.addAction({
+      id: 'label',
+      label,
+      keybindings: [keybinding],
+      precondition:
+        '!suggestWidgetVisible && !markersNavigationVisible && !findWidgetVisible',
+      run: callback,
+    })
+  }
+  addKeyBinding('run', CtrlEnter, async () => runCode(inputCode))
 
   return (
     <>
@@ -90,6 +99,7 @@ console.log(a + b);`)
                 className="block w-1/2  text-white bg-gray-900 border-gray-300 rounded-lg   shadow-sm p-0.5 border   dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 theme="vs-dark"
                 options={{ fontSize: 12 }}
+                onMount={handleEditorDidMount}
               />
             </div>
           </div>
