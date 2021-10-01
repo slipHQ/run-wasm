@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { createPythonClient, RunWasm } from 'run-wasm'
-import Editor from '@monaco-editor/react'
+import Editor, { useMonaco } from '@monaco-editor/react'
 import Script from 'next/script'
 import Navbar from '../components/Navbar'
 import GithubButton from '../components/GithubButton'
-import { runMethodOnCtrlEnterOrCmdEnterKeyPress } from '../utils'
 
 declare global {
   // <- [reference](https://stackoverflow.com/a/56458070/11542903)
@@ -31,6 +30,9 @@ plt.show()`)
 
   const [loadingText, setLoadingText] = useState('Loading pyodide...')
   const [pyodide, setPyodide] = useState(null)
+  const monaco = useMonaco()
+  const editorRef = useRef(null)
+  const CtrlEnter = monaco?.KeyMod?.CtrlCmd | monaco?.KeyCode?.Enter
 
   // Python code that is preloaded before the user's code is run
   // <- [reference](https://stackoverflow.com/a/59571016/1375972)
@@ -73,22 +75,25 @@ f.canvas.create_root_element = get_render_element.__get__(
       .then((pyodide) => setPyodide(pyodide))
   }, [])
 
-  useEffect(() => {
-    if (pyodide) {
-      window.addEventListener('keypress', (e) =>
-        runMethodOnCtrlEnterOrCmdEnterKeyPress(e, () =>
-          runCode(inputCode, pyodide)
-        )
-      )
-      return () => {
-        window.removeEventListener('keypress', (e) =>
-          runMethodOnCtrlEnterOrCmdEnterKeyPress(e, () =>
-            runCode(inputCode, pyodide)
-          )
-        )
-      }
-    }
-  }, [pyodide])
+  function handleEditorDidMount(editor) {
+    editorRef.current = editor
+  }
+
+  const addKeyBinding = (
+    label: string,
+    keybinding: any,
+    callback: () => void
+  ) => {
+    editorRef?.current?.addAction({
+      id: 'label',
+      label,
+      keybindings: [keybinding],
+      precondition:
+        '!suggestWidgetVisible && !markersNavigationVisible && !findWidgetVisible',
+      run: callback,
+    })
+  }
+  addKeyBinding('run', CtrlEnter, async () => runCode(inputCode, pyodide))
 
   return (
     <>
@@ -134,6 +139,7 @@ f.canvas.create_root_element = get_render_element.__get__(
                 className="block w-1/2  text-white bg-gray-900 border-gray-300 rounded-lg   shadow-sm p-0.5 border   dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 theme="vs-dark"
                 options={{ fontSize: 12 }}
+                onMount={handleEditorDidMount}
               />
             </div>
           </div>

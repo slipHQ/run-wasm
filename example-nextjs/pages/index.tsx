@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { createPythonClient, RunWasm } from 'run-wasm'
-import Editor from '@monaco-editor/react'
+import Editor, { useMonaco } from '@monaco-editor/react'
 import Script from 'next/script'
 import GithubButton from '../components/GithubButton'
 import Navbar from '../components/Navbar'
-import { runMethodOnCtrlEnterOrCmdEnterKeyPress } from '../utils'
 
 declare global {
   // <- [reference](https://stackoverflow.com/a/56458070/11542903)
@@ -34,6 +33,9 @@ def eratosthenes(n):
 
 eratosthenes(100)`)
   const [pyodide, setPyodide] = useState(null)
+  const monaco = useMonaco()
+  const editorRef = useRef(null)
+  const CtrlEnter = monaco?.KeyMod?.CtrlCmd | monaco?.KeyCode?.Enter
 
   async function runCode(code: string, pyodide: any) {
     console.log('running code', code)
@@ -57,22 +59,25 @@ eratosthenes(100)`)
       .then((pyodide) => setPyodide(pyodide))
   }, [])
 
-  useEffect(() => {
-    if (pyodide) {
-      window.addEventListener('keypress', (e) =>
-        runMethodOnCtrlEnterOrCmdEnterKeyPress(e, () =>
-          runCode(inputCode, pyodide)
-        )
-      )
-      return () => {
-        window.removeEventListener('keypress', (e) =>
-          runMethodOnCtrlEnterOrCmdEnterKeyPress(e, () =>
-            runCode(inputCode, pyodide)
-          )
-        )
-      }
-    }
-  }, [pyodide])
+  function handleEditorDidMount(editor) {
+    editorRef.current = editor
+  }
+
+  const addKeyBinding = (
+    label: string,
+    keybinding: any,
+    callback: () => void
+  ) => {
+    editorRef?.current?.addAction({
+      id: 'label',
+      label,
+      keybindings: [keybinding],
+      precondition:
+        '!suggestWidgetVisible && !markersNavigationVisible && !findWidgetVisible',
+      run: callback,
+    })
+  }
+  addKeyBinding('run', CtrlEnter, async () => runCode(inputCode, pyodide))
 
   return (
     <>
@@ -118,6 +123,7 @@ eratosthenes(100)`)
                   className="block w-1/2  text-white bg-gray-900 border-gray-300 rounded-lg   shadow-sm p-0.5 border   dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                   theme="vs-dark"
                   options={{ fontSize: 12 }}
+                  onMount={handleEditorDidMount}
                 />
               </div>
             </div>
