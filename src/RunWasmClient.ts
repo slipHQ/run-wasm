@@ -56,6 +56,8 @@ export class TSClient {
   // We store the logs here so that we can return them later from the run() method
   public logs: any = []
 
+  private libData: any
+
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   public constructor(protected ts: any) {
     // Overriding the console.log method so that we can store the logs
@@ -68,13 +70,37 @@ export class TSClient {
     }
   }
 
+  public async fetchLibs(libs: string[]): Promise<void> {
+    this.libData = Promise.all(
+      libs.map(async (lib: string) => {
+        const path = `typescript/lib/lib.${lib}.d.ts`
+        const content = await fetch(
+          `https://cdn.jsdelivr.net/npm/typescript@4.4.3/lib/lib.${lib}.d.ts`
+        )
+          .then((res) => res.text())
+          .catch(() => console.log('Failed to load lib: ' + lib))
+
+        return {
+          path,
+          content,
+          ast: this.ts.createSourceFile(
+            path,
+            content,
+            this.ts.ScriptTarget.Latest
+          ),
+        }
+      })
+    ).then((lib) => lib)
+  }
+
   public async run({
     code,
   }: {
     code: string
   }): Promise<{ errors: string[]; output: string[] }> {
-    const typeErrors = getTSTypeErrors(code, this.ts)
-
+    // The first time we run code, the fetch request for the lib data may still be pending.
+    const libData = await this.libData
+    const typeErrors = getTSTypeErrors(code, this.ts, libData)
     if (typeErrors.length === 0) {
       // If there are no errors, we can run the code
       this.logs = []
@@ -87,16 +113,20 @@ export class TSClient {
   }
 }
 
-function getTSTypeErrors(code: string, ts: any): string[] {
+function getTSTypeErrors(code: string, ts: any, libData: any[]): string[] {
   const dummyFilePath = '/file.ts'
   const textAst = ts.createSourceFile(
     dummyFilePath,
     code,
     ts.ScriptTarget.Latest
   )
-  const options = {}
+  const options = {
+    lib: [...libData],
+  }
+
   const host = {
-    fileExists: (filePath: string) => filePath === dummyFilePath,
+    fileExists: (filePath: string) =>
+      filePath === dummyFilePath || filePath.startsWith('typescript/lib/'),
     directoryExists: (dirPath: string) => dirPath === '/',
     getCurrentDirectory: () => '/',
     getDirectories: () => [],
@@ -104,26 +134,24 @@ function getTSTypeErrors(code: string, ts: any): string[] {
     getNewLine: () => '\n',
     getDefaultLibFileName: () => '',
     getSourceFile: (filePath: string) =>
-      filePath === dummyFilePath ? textAst : undefined,
+      filePath === dummyFilePath
+        ? textAst
+        : libData.find((lib) => lib.path === filePath)?.ast,
     readFile: (filePath: string) =>
-      filePath === dummyFilePath ? code : undefined,
+      filePath === dummyFilePath
+        ? code
+        : libData.find((lib) => lib.path === filePath)?.content,
     useCaseSensitiveFileNames: () => true,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     writeFile: () => {},
   }
-  const program = ts.createProgram({
-    options,
-    rootNames: [dummyFilePath],
-    host,
-  })
+
+  const rootNames = libData.map((lib) => lib.path)
+
+  const program = ts.createProgram([...rootNames, dummyFilePath], options, host)
 
   return ts
     .getPreEmitDiagnostics(program)
     .filter((d: { file: any }) => d.file)
-    .filter(
-      (d: { messageText: string }) =>
-        // Ignoring an error that says that console is not in scope (more about it here: https://stackoverflow.com/a/53764522 (check the imperfect example section))
-        !d.messageText.startsWith("Cannot find name 'console'")
-    )
     .map((d: { messageText: string }) => d.messageText)
 }

@@ -24,8 +24,7 @@ console.log(a + b);`)
 
   useEffect(() => {
     const tsClient = createTSClient(window.ts)
-    // tsClient.fetchLibs(['es5', 'dom']).then(() => setTsClient(tsClient))
-    setTsClient(tsClient)
+    tsClient.fetchLibs(['es5', 'dom']).then(() => setTsClient(tsClient))
   }, [])
 
   async function runCode(code: string) {
