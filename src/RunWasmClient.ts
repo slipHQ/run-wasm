@@ -103,6 +103,7 @@ export class TSClient {
     const typeErrors = getTSTypeErrors(code, this.ts, libData)
     if (typeErrors.length === 0) {
       // If there are no errors, we can run the code
+      this.logs = []
 
       // eslint-disable-next-line no-eval
       eval((await this.ts.transpile(code)) as string)
