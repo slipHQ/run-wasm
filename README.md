@@ -44,6 +44,7 @@ Thanks goes to these wonderful people.
     <td align="center"><a href="https://github.com/allstargaurav"><img src="https://avatars.githubusercontent.com/u/24932097?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gaurav</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=allstargaurav" title="Code">💻</a></td>
     <td align="center"><a href="http://pierreouannes.com"><img src="https://avatars.githubusercontent.com/u/28691487?v=4?s=100" width="100px;" alt=""/><br /><sub><b>PierreO</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=pouannes" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/devonzara"><img src="https://avatars.githubusercontent.com/u/1634972?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Devon Zara</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=devonzara" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/KagenLH"><img src="https://avatars.githubusercontent.com/u/5733445?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kagen Hearn</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=KagenLH" title="Code">💻</a></td>
   </tr>
 </table>
 
