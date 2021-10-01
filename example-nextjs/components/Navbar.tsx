@@ -1,5 +1,6 @@
 import { Disclosure } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import { SunIcon, MoonIcon } from '@heroicons/react/solid'
 import Logo from './Logo'
 import useDarkMode from '../hooks/useDarkMode'
 
@@ -85,7 +86,17 @@ export default function Navbar({ current }) {
                     </button>
                   </div>
                 </div>
-                <div className="flex items-center -mr-2 sm:hidden">
+                <div className="flex items-center -mr-2 gap-1 sm:hidden">
+                  <button
+                    onClick={() =>
+                      setTheme(theme === 'light' ? 'dark' : 'light')
+                    }
+                    className={
+                      'rounded-full self-center flex items-center justify-center h-8 w-8 p-1.5 bg-white shadow-inner border border-gray-100 capitalize'
+                    }
+                  >
+                    {theme === 'dark' ? (<SunIcon></SunIcon>) : (<MoonIcon></MoonIcon>)}
+                  </button>
                   {/* Mobile menu button */}
                   <Disclosure.Button className="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500">
                     <span className="sr-only">Open main menu</span>
