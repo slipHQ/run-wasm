@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createTSClient } from 'run-wasm'
 import Editor from '@monaco-editor/react'
 import Script from 'next/script'
@@ -20,9 +20,14 @@ b = 3;
 console.log(a + b);`)
   const [output, setOutput] = useState<Array<string>>([])
   const [errors, setErrors] = useState<Array<string>>([])
+  const [tsClient, setTsClient] = useState<any>(null)
+
+  useEffect(() => {
+    const tsClient = createTSClient(window.ts)
+    tsClient.fetchLibs(['es5', 'dom']).then(() => setTsClient(tsClient))
+  }, [])
 
   async function runCode(code: string) {
-    let tsClient = createTSClient(window.ts)
     const { errors: err, output: result } = await tsClient.run({ code })
     setOutput(result)
     setErrors(err)
@@ -75,20 +80,26 @@ console.log(a + b);`)
             </div>
           </div>
 
-          <div className="pt-8 ">
-            <div className="grid items-start justify-left">
-              <div className="relative group">
-                <button
-                  className="relative flex items-center py-4 leading-none bg-black divide-x divide-gray-600 rounded-lg px-7"
-                  onClick={() => runCode(inputCode)}
-                >
-                  <span className="text-gray-100 transition duration-200 group-hover:text-gray-100">
-                    Run Code →
-                  </span>
-                </button>
+          {tsClient ? (
+            <div className="pt-8 ">
+              <div className="grid items-start justify-left">
+                <div className="relative group">
+                  <button
+                    className="relative flex items-center py-4 leading-none bg-black divide-x divide-gray-600 rounded-lg px-7"
+                    onClick={() => runCode(inputCode)}
+                  >
+                    <span className="text-gray-100 transition duration-200 group-hover:text-gray-100">
+                      Run Code →
+                    </span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <label className="block pt-8 text-sm font-medium text-gray-700 dark:text-gray-450">
+              Loading TypeScript...
+            </label>
+          )}
 
           {errors.length > 0 && (
             <div>
