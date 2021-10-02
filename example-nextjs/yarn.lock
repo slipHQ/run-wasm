@@ -3092,6 +3092,14 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
+"run-wasm-python@link:../packages/run-wasm-python":
+  version "0.0.0"
+  uid ""
+
+"run-wasm-ts@link:../packages/run-wasm-ts":
+  version "0.0.0"
+  uid ""
+
 "run-wasm@link:..":
   version "0.0.0"
   uid ""
