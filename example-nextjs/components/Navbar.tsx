@@ -36,7 +36,7 @@ export default function Navbar({ current }) {
           <>
             <div className="px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between h-16">
-                <a href="https://www.runwasm.com">
+                <a aria-label="Home" href="https://www.runwasm.com">
                   <Logo className="h-10 my-3 w-36 dark:filter dark:invert" />
                 </a>
                 <div className="flex">
@@ -57,6 +57,9 @@ export default function Navbar({ current }) {
                       </a>
                     ))}
                     <button
+                      aria-label={`Activate ${
+                        resolvedTheme === 'dark' ? 'light' : 'dark'
+                      } mode`}
                       onClick={() =>
                         setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
                       }
@@ -65,15 +68,16 @@ export default function Navbar({ current }) {
                       }
                     >
                       {mounted && resolvedTheme === 'dark' ? (
-                        <SunIcon></SunIcon>
+                        <SunIcon />
                       ) : (
-                        <MoonIcon></MoonIcon>
+                        <MoonIcon />
                       )}
                     </button>
                   </div>
                 </div>
                 <div className="flex items-center -mr-2 gap-1 sm:hidden">
                   <button
+                    aria-label={`Activate ${resolvedTheme} mode`}
                     onClick={() =>
                       setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
                     }
@@ -82,9 +86,9 @@ export default function Navbar({ current }) {
                     }
                   >
                     {mounted && resolvedTheme === 'dark' ? (
-                      <SunIcon className="w-5 h-5"></SunIcon>
+                      <SunIcon className="w-5 h-5" />
                     ) : (
-                      <MoonIcon className="w-5 h-5"></MoonIcon>
+                      <MoonIcon className="w-5 h-5" />
                     )}
                   </button>
                   {/* Mobile menu button */}
