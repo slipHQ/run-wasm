@@ -2,15 +2,36 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Follow these steps below to get `run-wasm` working locally:
 
-```bash
-npm run dev
-# or
-yarn dev
+1. Clone the run-wasm repository and `cd` into it
+
+```shell
+# Using HTTPS
+git clone https://github.com/slipHQ/run-wasm.git
+# Or using SSH
+git clone git@github.com:slipHQ/run-wasm.git
+cd run-wasm
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Run `yarn` in the root directory.
+
+   This will install all the dependencies defined in the `package.json` file
+
+3. Run `yarn build` in the root directory.
+
+   This will build the `run-wasm` package in the `lib` folder and allow you to import it in the `example-nextjs` project.
+
+4. In the `example-nextjs` project, run `yarn`.
+
+```shell
+cd example-nextjs
+yarn
+```
+
+5. Run `yarn dev` or `npm run dev`
+
+   🎉 You should be able to see the component at [http://localhost:3000](http://localhost:300')
 
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
