@@ -82,9 +82,9 @@ export default function Navbar({ current }) {
                     }
                   >
                     {mounted && resolvedTheme === 'dark' ? (
-                      <SunIcon></SunIcon>
+                      <SunIcon className="w-5 h-5"></SunIcon>
                     ) : (
-                      <MoonIcon></MoonIcon>
+                      <MoonIcon className="w-5 h-5"></MoonIcon>
                     )}
                   </button>
                   {/* Mobile menu button */}
