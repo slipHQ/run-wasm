@@ -6,6 +6,7 @@ node_modules
 /example-nextjs/.next
 
 /lib
+/packages/**/lib
 
 .eslintcache
 yarn-*.log*
