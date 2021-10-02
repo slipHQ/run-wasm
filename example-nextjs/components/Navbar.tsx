@@ -77,7 +77,9 @@ export default function Navbar({ current }) {
                 </div>
                 <div className="flex items-center -mr-2 gap-1 sm:hidden">
                   <button
-                    aria-label={`Activate ${resolvedTheme} mode`}
+                    aria-label={`Activate ${
+                      resolvedTheme === 'dark' ? 'light' : 'dark'
+                    } mode`}
                     onClick={() =>
                       setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
                     }
