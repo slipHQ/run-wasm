@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export class PythonClient {
   // <- [reference](https://stackoverflow.com/a/59571016/1375972)
   // We redirect stdout to an IO string buffer so that it can be read later

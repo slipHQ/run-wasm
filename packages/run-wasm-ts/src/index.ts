@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-console */
 declare global {
   interface Console {
     oldLog: (message?: any, ...optionalParams: any[]) => void
@@ -30,7 +32,9 @@ export class TSClient {
           `https://cdn.jsdelivr.net/npm/typescript@4.4.3/lib/lib.${lib}.d.ts`
         )
           .then((res) => res.text())
-          .catch(() => console.log('Failed to load lib: ' + lib))
+          .catch(() => {
+            console.log(`Failed to load lib: ${lib}`)
+          })
 
         return {
           path,
