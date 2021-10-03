@@ -3100,7 +3100,7 @@ run-parallel@^1.1.9:
   version "0.0.0"
   uid ""
 
-"run-wasm@link:..":
+"run-wasm@link:../packages/run-wasm":
   version "0.0.0"
   uid ""
 
