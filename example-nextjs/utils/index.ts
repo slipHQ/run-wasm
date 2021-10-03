@@ -12,7 +12,7 @@ export const addKeyBinding = ({
   editorRef,
 }: CustomKeyBinding) => {
   editorRef?.current?.addAction({
-    id: 'label',
+    id: label,
     label,
     keybindings: [keybinding],
     precondition:
