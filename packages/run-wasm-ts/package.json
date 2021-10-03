@@ -5,12 +5,15 @@
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
   "devDependencies": {
+    "jest": "^27.2.4",
+    "ts-jest": "^27.0.5",
     "typescript": "^4.4.3"
   },
   "scripts": {
     "postinstall": "npm run build",
     "build": "yarn build:esm && yarn build:cjs",
     "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs"
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "test": "jest"
   }
 }
