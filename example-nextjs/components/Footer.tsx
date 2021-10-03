@@ -34,6 +34,7 @@ export default function Footer() {
               key={item.name}
               href={item.href}
               className="text-gray-400 dark:text-gray-450 hover:text-gray-500"
+              aria-label={item.name}
             >
               <span className="sr-only">{item.name}</span>
               <item.icon className="w-6 h-6" aria-hidden="true" />

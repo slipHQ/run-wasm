@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import type { AppProps } from 'next/app'
 import { useEffect } from 'react'
 import Layout from '../components/Layout'
+import { ThemeProvider } from 'next-themes'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -31,9 +32,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <ThemeProvider attribute="class">
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ThemeProvider>
   )
 }
 export default MyApp
