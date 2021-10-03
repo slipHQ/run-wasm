@@ -18,7 +18,7 @@
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "postinstall": "npm run build",
+    "prepare": "npm run build",
     "build": "yarn build:esm && yarn build:cjs",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
