@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { createPythonClient, RunWasm } from 'run-wasm'
-import Editor, { useMonaco } from '@monaco-editor/react'
+import Editor, { Monaco } from '@monaco-editor/react'
 import Script from 'next/script'
 import GithubButton from '../components/GithubButton'
 import Navbar from '../components/Navbar'
@@ -34,10 +34,8 @@ def eratosthenes(n):
 
 eratosthenes(100)`)
   const [pyodide, setPyodide] = useState(null)
-  const monaco = useMonaco()
   const editorRef = useRef(null)
-  const CtrlEnter = monaco?.KeyMod?.CtrlCmd | monaco?.KeyCode?.Enter
-
+  const [monaco, setMonaco] = useState<Monaco>(null)
   async function runCode(code: string, pyodide: any) {
     console.log('running code', code)
     let pythonClient = createPythonClient(pyodide)
@@ -60,17 +58,22 @@ eratosthenes(100)`)
       .then((pyodide) => setPyodide(pyodide))
   }, [])
 
-  function handleEditorDidMount(editor) {
-    editorRef.current = editor
-  }
+  useEffect(() => {
+    if (monaco && inputCode && pyodide) {
+      const runCodeBinding: CustomKeyBinding = {
+        label: 'run',
+        keybinding: monaco?.KeyMod?.CtrlCmd | monaco?.KeyCode?.Enter,
+        callback: async () => runCode(inputCode, pyodide),
+        editorRef,
+      }
+      addKeyBinding(runCodeBinding)
+    }
+  }, [monaco, inputCode, pyodide])
 
-  const runCodeBinding: CustomKeyBinding = {
-    label: 'run',
-    keybinding: CtrlEnter,
-    callback: async () => runCode(inputCode, pyodide),
-    editorRef,
+  function handleEditorDidMount(editor, monaco) {
+    editorRef.current = editor
+    setMonaco(monaco)
   }
-  addKeyBinding(runCodeBinding)
 
   return (
     <>

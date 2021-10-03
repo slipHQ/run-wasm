@@ -1,3 +1,4 @@
+//fix the type of "keybinding" and "editorRef"
 export interface CustomKeyBinding {
   label: string
   keybinding: any

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { createTSClient } from 'run-wasm'
-import Editor, { useMonaco } from '@monaco-editor/react'
+import Editor, { Monaco } from '@monaco-editor/react'
 import Script from 'next/script'
 import Navbar from '../components/Navbar'
 import GithubButton from '../components/GithubButton'
@@ -22,9 +22,8 @@ console.log(a + b);`)
   const [output, setOutput] = useState<Array<string>>([])
   const [errors, setErrors] = useState<Array<string>>([])
   const [tsClient, setTsClient] = useState<any>(null)
-  const monaco = useMonaco()
+  const [monaco, setMonaco] = useState<Monaco>(null)
   const editorRef = useRef(null)
-  const CtrlEnter = monaco?.KeyMod?.CtrlCmd | monaco?.KeyCode?.Enter
 
   useEffect(() => {
     const tsClient = createTSClient(window.ts)
@@ -37,17 +36,22 @@ console.log(a + b);`)
     setErrors(err)
   }
 
-  function handleEditorDidMount(editor) {
-    editorRef.current = editor
-  }
+  useEffect(() => {
+    if (monaco && inputCode) {
+      const runCodeBinding: CustomKeyBinding = {
+        label: 'run',
+        keybinding: monaco?.KeyMod?.CtrlCmd | monaco?.KeyCode?.Enter,
+        callback: async () => runCode(inputCode),
+        editorRef,
+      }
+      addKeyBinding(runCodeBinding)
+    }
+  }, [monaco, inputCode])
 
-  const runCodeBinding: CustomKeyBinding = {
-    label: 'run',
-    keybinding: CtrlEnter,
-    callback: async () => runCode(inputCode),
-    editorRef,
+  function handleEditorDidMount(editor, monaco) {
+    editorRef.current = editor
+    setMonaco(monaco)
   }
-  addKeyBinding(runCodeBinding)
 
   return (
     <>

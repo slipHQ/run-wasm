@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { createPythonClient, RunWasm } from 'run-wasm'
-import Editor, { useMonaco } from '@monaco-editor/react'
+import Editor, { Monaco } from '@monaco-editor/react'
 import Script from 'next/script'
 import Navbar from '../components/Navbar'
 import GithubButton from '../components/GithubButton'
@@ -31,10 +31,8 @@ plt.show()`)
 
   const [loadingText, setLoadingText] = useState('Loading pyodide...')
   const [pyodide, setPyodide] = useState(null)
-  const monaco = useMonaco()
   const editorRef = useRef(null)
-  const CtrlEnter = monaco?.KeyMod?.CtrlCmd | monaco?.KeyCode?.Enter
-
+  const [monaco, setMonaco] = useState<Monaco>(null)
   // Python code that is preloaded before the user's code is run
   // <- [reference](https://stackoverflow.com/a/59571016/1375972)
   const preloadMatplotlibCode = `
@@ -76,18 +74,22 @@ f.canvas.create_root_element = get_render_element.__get__(
       .then((pyodide) => setPyodide(pyodide))
   }, [])
 
-  function handleEditorDidMount(editor) {
+  useEffect(() => {
+    if (monaco && inputCode && pyodide) {
+      const runCodeBinding: CustomKeyBinding = {
+        label: 'run',
+        keybinding: monaco?.KeyMod?.CtrlCmd | monaco?.KeyCode?.Enter,
+        callback: async () => runCode(inputCode, pyodide),
+        editorRef,
+      }
+      addKeyBinding(runCodeBinding)
+    }
+  }, [monaco, inputCode, pyodide])
+
+  function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor
+    setMonaco(monaco)
   }
-
-  const runCodeBinding: CustomKeyBinding = {
-    label: 'run',
-    keybinding: CtrlEnter,
-    callback: async () => runCode(inputCode, pyodide),
-    editorRef,
-  }
-  addKeyBinding(runCodeBinding)
-
   return (
     <>
       <Navbar current="Matplotlib" />
