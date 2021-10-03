@@ -1,5 +1,5 @@
 {
-  "name": "run-wasm",
+  "name": "run-wasm-workspace",
   "version": "0.0.1",
   "description": "Run WASM based code executions in the browser easily",
   "keywords": [
@@ -8,9 +8,6 @@
     "react",
     "code execution"
   ],
-  "main": "./lib/cjs/index.js",
-  "module": "./lib/esm/index.js",
-  "types": "./lib/esm/index.d.ts",
   "repository": "https://github.com/slipHQ/wasm-run.git",
   "author": "Kenneth Cassel <kennethcassel@gmail.com>",
   "license": "Apache-2.0",
@@ -22,40 +19,33 @@
     "@commitlint/cli": "12.1.1",
     "@commitlint/config-conventional": "12.1.1",
     "@types/jest": "^27.0.2",
-    "@types/react": "^17.0.21",
-    "@types/react-dom": "^17.0.9",
     "all-contributors-cli": "^6.20.0",
     "babel-eslint": "^10.1.0",
     "eslint": "7.25.0",
     "eslint-config-galex": "2.15.2",
     "eslint-config-next": "^11.0.0",
     "husky": "^7.0.0",
-    "jest": "^27.2.2",
+    "lerna": "^4.0.0",
     "lint-staged": ">=10",
     "prettier": "2.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "ts-jest": "^27.0.5",
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "build": "yarn build:esm && yarn build:cjs",
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
+    "build:esm": "lerna run build:esm",
+    "build:cjs": "lerna run build:cjs",
+    "test": "lerna run test",
+    "install:clean": "rm -rf node_modules && rm yarn.lock && yarn",
     "check-types": "tsc",
     "format": "prettier --write --list-different --ignore-path .gitignore .",
     "lint": "eslint --cache . --ignore-path .gitignore --ignore-pattern 'lib/*'",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
-    "install:clean": "rm -rf node_modules && rm yarn.lock && yarn",
     "prepare": "husky install",
     "contributors:add": "all-contributors add",
-    "contributors:generate": "all-contributors generate",
-    "test": "jest"
+    "contributors:generate": "all-contributors generate"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "yarn lint",
     "*.{js,jsx,ts,tsx,css,json,md}": "yarn format"
-  },
-  "dependencies": {
-    "pyodide": "^0.18.0"
   }
 }

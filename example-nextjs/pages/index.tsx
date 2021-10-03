@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { createPythonClient, RunWasm } from 'run-wasm'
+import { createPythonClient } from 'run-wasm-python'
 import Editor from '@monaco-editor/react'
 import Script from 'next/script'
 import GithubButton from '../components/GithubButton'

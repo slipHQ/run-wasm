@@ -17,6 +17,5 @@
     "suppressImplicitAnyIndexErrors": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "lib", "example-nextjs"]
+  "exclude": ["node_modules", "example-nextjs"]
 }

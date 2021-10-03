@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
-import { RunWasmClient, PythonClient, TSClient } from './RunWasmClient'
+import { RunWasmClient } from './RunWasmClient'
 
 declare global {
   // <- [reference](https://stackoverflow.com/a/56458070/11542903)
@@ -31,13 +31,4 @@ const createRunWasmClient = (language: string): RunWasmClient => {
   return new RunWasmClient(language)
 }
 
-const createPythonClient = (pyodide: string): PythonClient => {
-  return new PythonClient(pyodide)
-}
-
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const createTSClient = (ts: any): TSClient => {
-  return new TSClient(ts)
-}
-
-export { RunWasm, createRunWasmClient, createPythonClient, createTSClient }
+export { RunWasm, createRunWasmClient }
