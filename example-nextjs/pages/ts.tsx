@@ -30,12 +30,6 @@ console.log(a + b);`)
     tsClient.fetchLibs(['es5', 'dom']).then(() => setTsClient(tsClient))
   }, [])
 
-  async function runCode(code: string) {
-    const { errors: err, output: result } = await tsClient.run({ code })
-    setOutput(result)
-    setErrors(err)
-  }
-
   useEffect(() => {
     if (monaco && inputCode) {
       const runCodeBinding: CustomKeyBinding = {
@@ -47,6 +41,12 @@ console.log(a + b);`)
       addKeyBinding(runCodeBinding)
     }
   }, [monaco, inputCode])
+
+  async function runCode(code: string) {
+    const { errors: err, output: result } = await tsClient.run({ code })
+    setOutput(result)
+    setErrors(err)
+  }
 
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor

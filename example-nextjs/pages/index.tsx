@@ -36,14 +36,6 @@ eratosthenes(100)`)
   const [pyodide, setPyodide] = useState(null)
   const editorRef = useRef(null)
   const [monaco, setMonaco] = useState<Monaco>(null)
-  async function runCode(code: string, pyodide: any) {
-    console.log('running code', code)
-    let pythonClient = createPythonClient(pyodide)
-    console.log(pythonClient)
-    let output = await pythonClient.run({ code })
-    setOutput(output)
-    console.log('output', output)
-  }
 
   useEffect(() => {
     console.log(inputCode)
@@ -69,6 +61,15 @@ eratosthenes(100)`)
       addKeyBinding(runCodeBinding)
     }
   }, [monaco, inputCode, pyodide])
+
+  async function runCode(code: string, pyodide: any) {
+    console.log('running code', code)
+    let pythonClient = createPythonClient(pyodide)
+    console.log(pythonClient)
+    let output = await pythonClient.run({ code })
+    setOutput(output)
+    console.log('output', output)
+  }
 
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor

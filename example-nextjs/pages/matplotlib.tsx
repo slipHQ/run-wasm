@@ -48,19 +48,6 @@ f.canvas.create_root_element = get_render_element.__get__(
     get_render_element, f.canvas.__class__
 )`
 
-  async function preloadMatplotlib(pyodide) {
-    await pyodide.loadPackage('matplotlib')
-    pyodide.runPython(preloadMatplotlibCode)
-    return pyodide
-  }
-
-  async function runCode(code: string, pyodide: any) {
-    console.log('running code', code)
-    let pythonClient = createPythonClient(pyodide)
-    console.log(pythonClient)
-    await pythonClient.run({ code })
-  }
-
   // Note that window.loadPyodide comes from the beforeInteractive pyodide.js Script
   useEffect(() => {
     window
@@ -86,10 +73,24 @@ f.canvas.create_root_element = get_render_element.__get__(
     }
   }, [monaco, inputCode, pyodide])
 
+  async function preloadMatplotlib(pyodide) {
+    await pyodide.loadPackage('matplotlib')
+    pyodide.runPython(preloadMatplotlibCode)
+    return pyodide
+  }
+
+  async function runCode(code: string, pyodide: any) {
+    console.log('running code', code)
+    let pythonClient = createPythonClient(pyodide)
+    console.log(pythonClient)
+    await pythonClient.run({ code })
+  }
+
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor
     setMonaco(monaco)
   }
+
   return (
     <>
       <Navbar current="Matplotlib" />
