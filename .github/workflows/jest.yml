@@ -29,8 +29,8 @@ jobs:
       - name: Install Modules
         run: yarn
 
-      - name: Run the Build
-        run: yarn build
+      - name: Bootstrap and run the Build
+        run: yarn bootstrap
 
       # Runs the tests
       - name: Run tests
