@@ -30,7 +30,7 @@ jobs:
         run: yarn
 
       - name: Bootstrap and run the Build
-        run: yarn bootstrap
+        run: yarn bootstrap --no-ci
 
       # Runs the tests
       - name: Run tests
