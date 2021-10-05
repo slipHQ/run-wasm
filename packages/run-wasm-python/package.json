@@ -1,5 +1,5 @@
 {
-  "name": "run-wasm-python",
+  "name": "@run-wasm/python",
   "version": "1.0.0",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",

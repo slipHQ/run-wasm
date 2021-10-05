@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { createTSClient } from 'run-wasm-ts'
+import { createTSClient } from '@run-wasm/ts'
 import Editor from '@monaco-editor/react'
 import Script from 'next/script'
 import Navbar from '../components/Navbar'
