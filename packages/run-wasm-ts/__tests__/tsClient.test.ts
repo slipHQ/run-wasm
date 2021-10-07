@@ -1,5 +1,4 @@
-import { createTSClient } from '../src'
-import { TSClient } from '../src/RunWasmClient'
+import { createTSClient, TSClient } from '../src'
 
 describe('createTSClient', () => {
   it('should return an instance of TSClient', () => {
