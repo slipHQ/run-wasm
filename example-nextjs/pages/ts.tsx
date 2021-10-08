@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { createTSClient } from 'run-wasm'
 import Editor, { Monaco } from '@monaco-editor/react'
+import { createTSClient } from '@run-wasm/ts'
 import Script from 'next/script'
 import Navbar from '../components/Navbar'
 import GithubButton from '../components/GithubButton'
