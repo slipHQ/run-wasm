@@ -46,6 +46,7 @@ Thanks goes to these wonderful people.
     <td align="center"><a href="https://github.com/devonzara"><img src="https://avatars.githubusercontent.com/u/1634972?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Devon Zara</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=devonzara" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/KagenLH"><img src="https://avatars.githubusercontent.com/u/5733445?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kagen Hearn</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=KagenLH" title="Code">💻</a></td>
     <td align="center"><a href="https://cameron.sh/"><img src="https://avatars.githubusercontent.com/u/732722?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Cameron Moreau</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=cameronmoreau" title="Code">💻</a></td>
+    <td align="center"><a href="https://www.mohdshadab.com/"><img src="https://avatars.githubusercontent.com/u/31199288?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Shadab</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=shadab14meb346" title="Code">💻</a></td>
   </tr>
 </table>
 
