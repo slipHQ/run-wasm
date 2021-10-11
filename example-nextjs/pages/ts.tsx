@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import Editor, { Monaco } from '@monaco-editor/react'
 import { createTSClient } from '@run-wasm/ts'
-import Editor from '@monaco-editor/react'
 import Script from 'next/script'
 import Navbar from '../components/Navbar'
 import GithubButton from '../components/GithubButton'
+import { addKeyBinding, CustomKeyBinding } from '../utils'
 
 declare global {
   interface Window {
@@ -21,16 +22,35 @@ console.log(a + b);`)
   const [output, setOutput] = useState<Array<string>>([])
   const [errors, setErrors] = useState<Array<string>>([])
   const [tsClient, setTsClient] = useState<any>(null)
+  const [monaco, setMonaco] = useState<Monaco>(null)
+  const editorRef = useRef(null)
 
   useEffect(() => {
     const tsClient = createTSClient(window.ts)
     tsClient.fetchLibs(['es5', 'dom']).then(() => setTsClient(tsClient))
   }, [])
 
+  useEffect(() => {
+    if (monaco && inputCode) {
+      const runCodeBinding: CustomKeyBinding = {
+        label: 'run',
+        keybinding: monaco?.KeyMod?.CtrlCmd | monaco?.KeyCode?.Enter,
+        callback: async () => runCode(inputCode),
+        editorRef,
+      }
+      addKeyBinding(runCodeBinding)
+    }
+  }, [monaco, inputCode])
+
   async function runCode(code: string) {
     const { errors: err, output: result } = await tsClient.run({ code })
     setOutput(result)
     setErrors(err)
+  }
+
+  function handleEditorDidMount(editor, monaco) {
+    editorRef.current = editor
+    setMonaco(monaco)
   }
 
   return (
@@ -76,6 +96,7 @@ console.log(a + b);`)
                 className="block w-1/2  text-white bg-gray-900 border-gray-300 rounded-lg   shadow-sm p-0.5 border   dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 theme="vs-dark"
                 options={{ fontSize: 12 }}
+                onMount={handleEditorDidMount}
               />
             </div>
           </div>

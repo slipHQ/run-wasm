@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import Editor, { Monaco } from '@monaco-editor/react'
 import { createPythonClient } from '@run-wasm/python'
-import Editor from '@monaco-editor/react'
 import Script from 'next/script'
 import Navbar from '../components/Navbar'
 import GithubButton from '../components/GithubButton'
+import { addKeyBinding, CustomKeyBinding } from '../utils'
 
 declare global {
   // <- [reference](https://stackoverflow.com/a/56458070/11542903)
@@ -30,7 +31,8 @@ plt.show()`)
 
   const [loadingText, setLoadingText] = useState('Loading pyodide...')
   const [pyodide, setPyodide] = useState(null)
-
+  const editorRef = useRef(null)
+  const [monaco, setMonaco] = useState<Monaco>(null)
   // Python code that is preloaded before the user's code is run
   // <- [reference](https://stackoverflow.com/a/59571016/1375972)
   const preloadMatplotlibCode = `
@@ -46,6 +48,31 @@ f.canvas.create_root_element = get_render_element.__get__(
     get_render_element, f.canvas.__class__
 )`
 
+  // Note that window.loadPyodide comes from the beforeInteractive pyodide.js Script
+  useEffect(() => {
+    window
+      .loadPyodide({
+        indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.18.1/full/',
+      })
+      .then((pyodide) => {
+        setLoadingText('Loading matplotlib...')
+        return preloadMatplotlib(pyodide)
+      })
+      .then((pyodide) => setPyodide(pyodide))
+  }, [])
+
+  useEffect(() => {
+    if (monaco && inputCode && pyodide) {
+      const runCodeBinding: CustomKeyBinding = {
+        label: 'run',
+        keybinding: monaco?.KeyMod?.CtrlCmd | monaco?.KeyCode?.Enter,
+        callback: async () => runCode(inputCode, pyodide),
+        editorRef,
+      }
+      addKeyBinding(runCodeBinding)
+    }
+  }, [monaco, inputCode, pyodide])
+
   async function preloadMatplotlib(pyodide) {
     await pyodide.loadPackage('matplotlib')
     pyodide.runPython(preloadMatplotlibCode)
@@ -59,18 +86,10 @@ f.canvas.create_root_element = get_render_element.__get__(
     await pythonClient.run({ code })
   }
 
-  // Note that window.loadPyodide comes from the beforeInteractive pyodide.js Script
-  useEffect(() => {
-    window
-      .loadPyodide({
-        indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.18.1/full/',
-      })
-      .then((pyodide) => {
-        setLoadingText('Loading matplotlib...')
-        return preloadMatplotlib(pyodide)
-      })
-      .then((pyodide) => setPyodide(pyodide))
-  }, [])
+  function handleEditorDidMount(editor, monaco) {
+    editorRef.current = editor
+    setMonaco(monaco)
+  }
 
   return (
     <>
@@ -116,6 +135,7 @@ f.canvas.create_root_element = get_render_element.__get__(
                 className="block w-1/2  text-white bg-gray-900 border-gray-300 rounded-lg   shadow-sm p-0.5 border   dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 theme="vs-dark"
                 options={{ fontSize: 12 }}
+                onMount={handleEditorDidMount}
               />
             </div>
           </div>

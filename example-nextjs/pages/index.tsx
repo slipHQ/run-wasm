@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { createPythonClient } from '@run-wasm/python'
-import Editor from '@monaco-editor/react'
+import Editor, { Monaco } from '@monaco-editor/react'
 import Script from 'next/script'
 import GithubButton from '../components/GithubButton'
 import Navbar from '../components/Navbar'
+import { addKeyBinding, CustomKeyBinding } from '../utils'
 
 declare global {
   // <- [reference](https://stackoverflow.com/a/56458070/11542903)
@@ -33,15 +34,8 @@ def eratosthenes(n):
 
 eratosthenes(100)`)
   const [pyodide, setPyodide] = useState(null)
-
-  async function runCode(code: string, pyodide: any) {
-    console.log('running code', code)
-    let pythonClient = createPythonClient(pyodide)
-    console.log(pythonClient)
-    let output = await pythonClient.run({ code })
-    setOutput(output)
-    console.log('output', output)
-  }
+  const editorRef = useRef(null)
+  const [monaco, setMonaco] = useState<Monaco>(null)
 
   useEffect(() => {
     console.log(inputCode)
@@ -55,6 +49,32 @@ eratosthenes(100)`)
       })
       .then((pyodide) => setPyodide(pyodide))
   }, [])
+
+  useEffect(() => {
+    if (monaco && inputCode && pyodide) {
+      const runCodeBinding: CustomKeyBinding = {
+        label: 'run',
+        keybinding: monaco?.KeyMod?.CtrlCmd | monaco?.KeyCode?.Enter,
+        callback: async () => runCode(inputCode, pyodide),
+        editorRef,
+      }
+      addKeyBinding(runCodeBinding)
+    }
+  }, [monaco, inputCode, pyodide])
+
+  async function runCode(code: string, pyodide: any) {
+    console.log('running code', code)
+    let pythonClient = createPythonClient(pyodide)
+    console.log(pythonClient)
+    let output = await pythonClient.run({ code })
+    setOutput(output)
+    console.log('output', output)
+  }
+
+  function handleEditorDidMount(editor, monaco) {
+    editorRef.current = editor
+    setMonaco(monaco)
+  }
 
   return (
     <>
@@ -100,6 +120,7 @@ eratosthenes(100)`)
                   className="block w-1/2  text-white bg-gray-900 border-gray-300 rounded-lg   shadow-sm p-0.5 border   dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                   theme="vs-dark"
                   options={{ fontSize: 12 }}
+                  onMount={handleEditorDidMount}
                 />
               </div>
             </div>
