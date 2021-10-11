@@ -15,9 +15,9 @@ node-fetch@^2.6.1:
     whatwg-url "^5.0.0"
 
 pyodide@^0.18.0:
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/pyodide/-/pyodide-0.18.1.tgz#9b987de7dc30de261aeabea64052bb7ab3f1fef7"
-  integrity sha512-QgkdYXu0nkWoJ5Ein2GAgpsT6gfuRCdmiR5C3JSTUEyHnMY0MqU0hx7hpD0/ZVXNSalG7ytVQ+9SgCL2RtVcqg==
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/pyodide/-/pyodide-0.18.2.tgz#6c2dbfcac3f0a5f6e2bd5d2d2766aea50e4c29f0"
+  integrity sha512-t4Mi75oDHc3NPmF8CjpiQ6/oMrxzT7ktv0WAyCnM4PcVG4uQ5bce3jZpeOQhrbUWUYhx3clwhsSGj9JawMm3Ug==
   dependencies:
     base-64 "^1.0.0"
     node-fetch "^2.6.1"
