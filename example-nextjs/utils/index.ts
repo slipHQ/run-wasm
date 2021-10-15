@@ -3,16 +3,17 @@ export interface CustomKeyBinding {
   label: string
   keybinding: any
   callback: () => void
-  editorRef: any
+  editor: any
 }
 
 export const addKeyBinding = ({
   label,
   keybinding,
   callback,
-  editorRef,
+  editor,
 }: CustomKeyBinding) => {
-  editorRef?.current?.addAction({
+  console.log(label, keybinding)
+  return editor?.addAction({
     id: label,
     label,
     keybindings: [keybinding],

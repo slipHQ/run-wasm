@@ -42,14 +42,14 @@ export default function Footer() {
           ))}
         </div>
         <div className="mt-8 text-gray-400 dark:text-gray-450 md:mt-0 md:order-1">
-          <p className="text-base text-center ">
+          <div className="text-base text-center ">
             <p className="text-base text-center">
               Made with ♥︎ by{' '}
               <a href="https://www.slip.so" className="font-bold">
                 Slip
               </a>
             </p>
-          </p>
+          </div>
         </div>
       </div>
     </footer>

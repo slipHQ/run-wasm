@@ -16,19 +16,26 @@ export default function Navbar({ current }) {
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), [])
 
-  const navigation = [
-    { name: 'Home', href: '/', current: current === 'Home' },
-    {
-      name: 'Matplotlib',
-      href: '/matplotlib',
-      current: current === 'Matplotlib',
-    },
-    {
-      name: 'TypeScript',
-      href: '/ts',
-      current: current === 'TypeScript',
-    },
-  ]
+  const navigation = React.useMemo(
+    () => [
+      {
+        name: 'Home',
+        href: '/',
+        current: current === 'Home' || current === 'Python',
+      },
+      {
+        name: 'Matplotlib',
+        href: '/matplotlib',
+        current: current === 'Matplotlib',
+      },
+      {
+        name: 'TypeScript',
+        href: '/ts',
+        current: current === 'TypeScript',
+      },
+    ],
+    [current]
+  )
   return (
     <div className="bg-white shadow dark:bg-gray-825">
       <Disclosure as="nav" className="mx-auto max-w-7xl">
