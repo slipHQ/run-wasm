@@ -1,6 +1,6 @@
 {
   "name": "@run-wasm/python",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",

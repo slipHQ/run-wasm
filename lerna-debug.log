@@ -1,0 +1,52 @@
+38 error Error: Command failed with exit code 1: git commit -F /private/var/folders/rn/wzlw8n6n18l5k5r331f5s2zc0000gn/T/dc8f550a-b98b-4c30-a7f4-acede4917f02/lerna-commit.txt
+38 error $ lerna run check-types
+38 error lerna notice cli v4.0.0
+38 error lerna info versioning independent
+38 error lerna info Executing command in 3 packages: "yarn run check-types"
+38 error lerna info run Ran npm script 'check-types' in '@run-wasm/python' in 4.3s:
+38 error $ tsc
+38 error lerna info run Ran npm script 'check-types' in '@run-wasm/ts' in 6.4s:
+38 error $ tsc
+38 error lerna info run Ran npm script 'check-types' in '@run-wasm/run-wasm' in 7.1s:
+38 error $ tsc
+38 error lerna success run Ran npm script 'check-types' in 3 packages in 7.1s:
+38 error lerna success - @run-wasm/python
+38 error lerna success - @run-wasm/ts
+38 error lerna success - @run-wasm/run-wasm
+38 error [STARTED] Preparing...
+38 error [SUCCESS] Preparing...
+38 error [STARTED] Running tasks...
+38 error [STARTED] Running tasks for *.{js,jsx,ts,tsx}
+38 error [STARTED] Running tasks for *.{js,jsx,ts,tsx,css,json,md}
+38 error [SKIPPED] No staged files match *.{js,jsx,ts,tsx}
+38 error [STARTED] yarn format
+38 error [SUCCESS] yarn format
+38 error [SUCCESS] Running tasks for *.{js,jsx,ts,tsx,css,json,md}
+38 error [SUCCESS] Running tasks...
+38 error [STARTED] Applying modifications...
+38 error [SUCCESS] Applying modifications...
+38 error [STARTED] Cleaning up...
+38 error [SUCCESS] Cleaning up...
+38 error ⧗   input: Publish
+38 error
+38 error  - @run-wasm/python@0.0.1
+38 error  - @run-wasm/ts@0.0.1
+38 error  - @run-wasm/run-wasm@0.0.1
+38 error ✖   subject may not be empty [subject-empty]
+38 error ✖   type may not be empty [type-empty]
+38 error
+38 error ✖   found 2 problems, 0 warnings
+38 error ⓘ   Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint
+38 error
+38 error npm ERR! code 1
+38 error npm ERR! path /Users/kennethcassel/slip/run-wasm
+38 error npm ERR! command failed
+38 error npm ERR! command sh -c commitlint "--edit" ".git/COMMIT_EDITMSG"
+38 error
+38 error npm ERR! A complete log of this run can be found in:
+38 error npm ERR!     /Users/kennethcassel/.npm/_logs/2021-10-19T14_27_36_784Z-debug.log
+38 error husky - commit-msg hook exited with code 1 (error)
+38 error     at makeError (/Users/kennethcassel/slip/run-wasm/node_modules/execa/lib/error.js:60:11)
+38 error     at handlePromise (/Users/kennethcassel/slip/run-wasm/node_modules/execa/index.js:118:26)
+38 error     at processTicksAndRejections (node:internal/process/task_queues:94:5)
+38 error     at async Promise.all (index 0)
