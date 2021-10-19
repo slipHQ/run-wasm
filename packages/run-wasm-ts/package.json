@@ -17,5 +17,5 @@
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "test": "jest"
   },
-  "gitHead": "a84c109ff6362367802e13080e444a5717d0cc7d"
+  "gitHead": "83d62ac7f2689686432ca690a67718435c7076e0"
 }
