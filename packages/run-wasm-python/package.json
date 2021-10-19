@@ -16,5 +16,6 @@
   },
   "dependencies": {
     "pyodide": "^0.18.0"
-  }
+  },
+  "gitHead": "a84c109ff6362367802e13080e444a5717d0cc7d"
 }
