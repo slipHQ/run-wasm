@@ -48,11 +48,15 @@ cd run-wasm
 
    This will install all the dependencies defined in the `package.json` file
 
-3. Run `yarn build` in the root directory.
+3. Run `npx lerna bootstrap` in the root directory.
+
+   This will link packages together and install their dependencies.
+
+4. Run `yarn build` in the root directory.
 
    This will build the `run-wasm` package in the `lib` folder and allow you to import it in the `example-nextjs` project.
 
-4. In the `example-nextjs` project, run `yarn`.
+5. In the `example-nextjs` project, run `yarn`.
 
 ```shell
 cd example-nextjs
