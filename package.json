@@ -9,7 +9,7 @@
     "react",
     "code execution"
   ],
-  "repository": "https://github.com/slipHQ/wasm-run.git",
+  "repository": "https://github.com/slipHQ/run-wasm.git",
   "author": "Kenneth Cassel <kennethcassel@gmail.com>",
   "license": "Apache-2.0",
   "devDependencies": {
