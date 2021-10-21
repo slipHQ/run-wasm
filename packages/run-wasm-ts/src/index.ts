@@ -57,10 +57,10 @@ export class TSClient {
     // The first time we run code, the fetch request for the lib data may still be pending.
     const libData = await this.libData
     const typeErrors = getTSTypeErrors(code, this.ts, libData)
+    this.logs = []
+
     if (typeErrors.length === 0) {
       // If there are no errors, we can run the code
-      this.logs = []
-
       // eslint-disable-next-line no-eval
       eval((await this.ts.transpile(code)) as string)
     }
