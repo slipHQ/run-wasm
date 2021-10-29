@@ -1,7 +1,8 @@
 import * as React from 'react'
+import Script from 'next/script'
 import GithubButton from './GithubButton'
 import Navbar from './Navbar'
-import Editor from './Editor'
+import { Editor } from '@run-wasm/run-wasm'
 
 interface Props {
   defaultLanguage?: string
@@ -38,6 +39,10 @@ export default function CodeRunnerUI(props: Props) {
       <Navbar current={languageLabel} />
       <div className="max-w-4xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
+          <Script
+            src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"
+            strategy="beforeInteractive"
+          />
           <main className="mx-auto mb-12 max-w-7xl sm:mt-12">
             <div className="text-left">
               <h1 className="text-3xl tracking-tight text-gray-900 dark:text-white sm:text-5xl md:text-5xl">

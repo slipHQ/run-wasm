@@ -8,6 +8,10 @@
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   },
+  "dependencies": {
+    "@monaco-editor/react": "^4.2.2",
+    "monaco-editor": "^0.29.1"
+  },
   "devDependencies": {
     "@types/react": "^17.0.21",
     "@types/react-dom": "^17.0.9",

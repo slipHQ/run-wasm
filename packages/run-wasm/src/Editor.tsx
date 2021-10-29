@@ -1,5 +1,6 @@
+/* eslint-disable */
+
 import * as React from 'react'
-import Script from 'next/script'
 import MonacoEditor, { Monaco } from '@monaco-editor/react'
 import { addKeyBinding, CustomKeyBinding } from '../utils'
 
@@ -29,7 +30,7 @@ export default function Editor(props: Props) {
   const inputCodeRef = React.useRef(initialCode)
   const editorRef = React.useRef(null)
 
-  const [monaco, setMonaco] = React.useState<Monaco>(null)
+  const [monaco, setMonaco] = React.useState<Monaco | null>(null)
 
   function handleEditorDidMount(editor: any, monaco: Monaco) {
     editorRef.current = editor
@@ -51,10 +52,6 @@ export default function Editor(props: Props) {
 
   return (
     <>
-      <Script
-        src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"
-        strategy="beforeInteractive"
-      />
       <div>
         <div>
           <label className="block pb-4 text-sm font-medium text-gray-700 dark:text-gray-450">
@@ -69,7 +66,7 @@ export default function Editor(props: Props) {
                 defaultLanguage={defaultLanguage}
                 defaultValue={inputCodeRef.current}
                 onChange={(value) => {
-                  inputCodeRef.current = value
+                  inputCodeRef.current = value || ''
                 }}
                 className="block w-1/2  text-white bg-gray-900 border-gray-300 rounded-lg   shadow-sm p-0.5 border   dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 theme="vs-dark"

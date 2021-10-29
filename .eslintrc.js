@@ -9,6 +9,7 @@ module.exports = {
     'import/order': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/consistent-type-definitions': 'off',
+    'unicorn/no-abusive-eslint-disable': 'off',
   },
   env: {
     jest: true,

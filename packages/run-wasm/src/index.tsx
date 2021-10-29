@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import { RunWasmClient } from './RunWasmClient'
+import Editor from './Editor'
 
 declare global {
   // <- [reference](https://stackoverflow.com/a/56458070/11542903)
@@ -31,4 +32,4 @@ const createRunWasmClient = (language: string): RunWasmClient => {
   return new RunWasmClient(language)
 }
 
-export { RunWasm, createRunWasmClient }
+export { RunWasm, createRunWasmClient, Editor }
