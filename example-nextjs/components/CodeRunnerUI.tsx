@@ -23,6 +23,15 @@ export default function CodeRunnerUI(props: Props) {
     onRunCode,
   } = props
 
+  const [output, setOutput] = React.useState('')
+
+  async function runCode(code: string) {
+    const output = await onRunCode(code)
+    if (output) {
+      setOutput(output)
+    }
+  }
+
   return (
     <>
       <Navbar current={languageLabel} />
@@ -51,11 +60,12 @@ export default function CodeRunnerUI(props: Props) {
         </div>
         <Editor
           initialCode={initialCode}
+          output={output}
           languageLabel={languageLabel}
           hideOutputEditor={hideOutputEditor}
           isLoading={isLoading}
           defaultLanguage={defaultLanguage}
-          onRunCode={onRunCode}
+          onRunCode={runCode}
         />
       </div>
     </>

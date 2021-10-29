@@ -4,6 +4,7 @@ import { addKeyBinding, CustomKeyBinding } from '../utils'
 
 interface Props {
   initialCode: string
+  output: string
   languageLabel: string
   hideOutputEditor?: boolean
   isLoading?: boolean
@@ -15,6 +16,7 @@ interface Props {
 export default function Editor(props: Props) {
   const {
     initialCode,
+    output,
     languageLabel,
     hideOutputEditor,
     isLoading = false,
@@ -27,14 +29,6 @@ export default function Editor(props: Props) {
   const editorRef = React.useRef(null)
 
   const [monaco, setMonaco] = React.useState<Monaco>(null)
-  const [output, setOutput] = React.useState('')
-
-  async function runCode(code: string) {
-    const output = await onRunCode(code)
-    if (output) {
-      setOutput(output)
-    }
-  }
 
   function handleEditorDidMount(editor: any, monaco: Monaco) {
     editorRef.current = editor
@@ -48,7 +42,7 @@ export default function Editor(props: Props) {
     const runCodeBinding: CustomKeyBinding = {
       label: 'run',
       keybinding: monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
-      callback: () => runCode(inputCodeRef.current),
+      callback: () => onRunCode(inputCodeRef.current),
       editor: editorRef.current,
     }
     return addKeyBinding(runCodeBinding)
@@ -87,7 +81,7 @@ export default function Editor(props: Props) {
           <div className="relative group">
             <button
               className="relative flex items-center py-4 leading-none bg-black divide-x divide-gray-600 rounded-lg px-7 border-gray-300 disabled:bg-gray-700 disabled:cursor-not-allowed"
-              onClick={() => runCode(inputCodeRef.current)}
+              onClick={() => onRunCode(inputCodeRef.current)}
               disabled={isLoading}
             >
               <span className="text-gray-100 transition duration-200 group-hover:text-gray-100">
