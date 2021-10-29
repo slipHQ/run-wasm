@@ -68,7 +68,7 @@ export default function Editor(props: Props) {
                 }}
                 className="block w-1/2  text-white bg-gray-900 border-gray-300 rounded-lg   shadow-sm p-0.5 border   dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 theme="vs-dark"
-                options={{ fontSize: 12 }}
+                options={{ fontSize: 12, minimap: { enabled: false } }}
                 onMount={handleEditorDidMount}
               />
             </div>
@@ -107,7 +107,11 @@ export default function Editor(props: Props) {
               defaultLanguage="python"
               className="block w-1/2 text-white bg-gray-900 border-gray-300 rounded-lg shadow-sm p-0.5 border dark:border-purple-300 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
               theme="vs-dark"
-              options={{ readOnly: true }}
+              options={{
+                readOnly: true,
+                fontSize: 12,
+                minimap: { enabled: false },
+              }}
             />
           </div>
         </div>
