@@ -9,6 +9,7 @@ interface Props {
   onRunCode(inputCode: string): Promise<string | void>
   languageLabel: string
   isLoading?: boolean
+  children?: React.ReactNode
   hideOutputEditor?: boolean
 }
 
@@ -19,6 +20,7 @@ export default function CodeRunnerUI(props: Props) {
     hideOutputEditor,
     isLoading = false,
     defaultLanguage,
+    children,
     onRunCode,
   } = props
 
