@@ -63,7 +63,9 @@ export default function CodeRunnerUI(props: Props) {
           isLoading={isLoading}
           defaultLanguage={defaultLanguage}
           onRunCode={runCode}
-        />
+        >
+          {children}
+        </Editor>
       </div>
     </>
   )
