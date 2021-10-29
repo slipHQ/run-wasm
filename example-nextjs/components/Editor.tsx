@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Script from 'next/script'
 import MonacoEditor, { Monaco } from '@monaco-editor/react'
 import { addKeyBinding, CustomKeyBinding } from '../utils'
 
@@ -50,6 +51,10 @@ export default function Editor(props: Props) {
 
   return (
     <>
+      <Script
+        src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"
+        strategy="beforeInteractive"
+      />
       <div>
         <div>
           <label className="block pb-4 text-sm font-medium text-gray-700 dark:text-gray-450">
