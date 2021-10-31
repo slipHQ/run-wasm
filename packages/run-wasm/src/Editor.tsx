@@ -65,7 +65,7 @@ export default function Editor(props: Props) {
           </label>
 
           <div style={{ marginTop: '1rem' }}>
-            <div>
+            <div style={{ borderRadius: '0.5rem', overflow: 'hidden' }}>
               <MonacoEditor
                 height="20rem"
                 defaultLanguage={defaultLanguage}
@@ -74,7 +74,11 @@ export default function Editor(props: Props) {
                   inputCodeRef.current = value || ''
                 }}
                 theme="vs-dark"
-                options={{ fontSize: 12, minimap: { enabled: false } }}
+                options={{
+                  fontSize: 12,
+                  minimap: { enabled: false },
+                  padding: { top: 16 },
+                }}
                 onMount={handleEditorDidMount}
               />
             </div>
@@ -116,7 +120,13 @@ export default function Editor(props: Props) {
             Output
           </label>
 
-          <div style={{ marginTop: '1rem' }}>
+          <div
+            style={{
+              marginTop: '1rem',
+              borderRadius: '0.5rem',
+              overflow: 'hidden',
+            }}
+          >
             <MonacoEditor
               value={output?.toString()}
               height="20rem"
@@ -126,6 +136,7 @@ export default function Editor(props: Props) {
                 readOnly: true,
                 fontSize: 12,
                 minimap: { enabled: false },
+                padding: { top: 16 },
               }}
             />
           </div>
