@@ -45,8 +45,8 @@ yarn add @run-wasm/ts
 ```jsx
 import React, { useEffect, useState, useRef } from 'react'
 import { createTSClient } from '@run-wasm/ts'
+import { Editor } from '@run-wasm/run-wasm
 import Script, { initScriptLoader } from 'next/script'
-import CodeRunnerUI from '../components/CodeRunnerUI'
 
 declare global {
   interface Window {
@@ -65,6 +65,7 @@ console.log(a + b);`
 function App() {
   const [errors, setErrors] = useState<Array<string>>([])
   const [tsClient, setTsClient] = useState<any>(null)
+  const [output, setOutput] = React.useState('')
 
   function initialiseTsClient() {
     const tsClient = createTSClient(window.ts)
@@ -90,20 +91,24 @@ function App() {
   async function runCode(code: string) {
     const { errors, output } = await tsClient.run({ code })
     setErrors(errors)
-    return output
+    if (output) {
+      setOutput(output)
+    }
   }
 
   return (
     <>
       <Script strategy="beforeInteractive" src={tsScript} />
       <Script src="https://kit.fontawesome.com/137d63e13e.js" />
-      <CodeRunnerUI
-        initialCode={initialCode}
-        languageLabel="TypeScript"
-        defaultLanguage="typescript"
-        onRunCode={runCode}
-        isLoading={!tsClient}
-      >
+      <Editor
+          initialCode={initialCode}
+          output={output}
+          languageLabel="TypeScript"
+          hideOutputEditor={hideOutputEditor}
+          isLoading={isLoading}
+          defaultLanguage="typescript"
+          onRunCode={runCode}
+        >
         {errors.length > 0 && (
           <div>
             <label className="block pt-8 text-sm font-medium text-gray-700 dark:text-gray-450">
@@ -116,7 +121,7 @@ function App() {
             ))}
           </div>
         )}
-      </CodeRunnerUI>
+      </Editor>
     </>
   )
 }
