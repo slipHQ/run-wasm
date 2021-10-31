@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "yarn run link-react && next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "link-react": "cd ./node_modules/react && yarn link && cd ../../../packages/run-wasm && yarn link \"react\""
   },
   "dependencies": {
     "@headlessui/react": "^1.4.1",
