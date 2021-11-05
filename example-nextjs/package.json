@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "yarn run link-react && next dev",
+    "prebuild": "yarn run link-react",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
