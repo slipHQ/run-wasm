@@ -47,8 +47,8 @@ yarn add @run-wasm/python
 ```jsx
 import React, { useEffect, useState, useRef } from 'react'
 import { createPythonClient } from '@run-wasm/python'
+import { Editor } from '@run-wasm/run-wasm
 import Script from 'next/script'
-import CodeRunnerUI from '../components/CodeRunnerUI'
 
 declare global {
   // <- [reference](https://stackoverflow.com/a/56458070/11542903)
@@ -73,10 +73,14 @@ eratosthenes(100)`
 
 function App() {
   const [pyodide, setPyodide] = useState(null)
+  const [output, setOutput] = React.useState('')
 
   async function runCode(code: string) {
     let pythonClient = createPythonClient(pyodide)
-    return await pythonClient.run({ code })
+    const output = await pythonClient.run({ code })
+    if (output) {
+      setOutput(output)
+    }
   }
 
   // Note that window.loadPyodide comes from the beforeInteractive pyodide.js Script
@@ -96,12 +100,15 @@ function App() {
         src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"
         strategy="beforeInteractive"
       />
-      <CodeRunnerUI
+      <Editor
         initialCode={initialCode}
-        onRunCode={runCode}
+        output={output}
         languageLabel="Python"
-        isLoading={!pyodide}
+        hideOutputEditor={hideOutputEditor}
+        isLoading={isLoading}
         defaultLanguage="python"
+        onRunCode={runCode}
+      />
       />
     </>
   )

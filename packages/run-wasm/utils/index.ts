@@ -1,4 +1,6 @@
-//fix the type of "keybinding" and "editorRef"
+/* eslint-disable */
+
+// TODO: fix the type of "keybinding" and "editorRef"
 export interface CustomKeyBinding {
   label: string
   keybinding: any

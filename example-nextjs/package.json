@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "yarn run link-react && next dev",
+    "prebuild": "yarn run link-react",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "link-react": "cd ./node_modules/react && yarn link && cd ../../../packages/run-wasm && yarn link \"react\""
   },
   "dependencies": {
     "@headlessui/react": "^1.4.1",
     "@heroicons/react": "^1.0.4",
-    "@monaco-editor/react": "^4.2.2",
     "fathom-client": "^3.0.0",
     "next": "11.1.2",
     "next-themes": "^0.0.15",
