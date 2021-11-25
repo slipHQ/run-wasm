@@ -50,6 +50,7 @@ Thanks goes to these wonderful people.
   </tr>
   <tr>
     <td align="center"><a href="https://bitwiser.in"><img src="https://avatars.githubusercontent.com/u/717550?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Brijesh Bittu</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=brijeshb42" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/octokatherine"><img src="https://avatars.githubusercontent.com/u/49968061?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Katherine Peterson</b></sub></a><br /><a href="https://github.com/slipHQ/run-wasm/commits?author=octokatherine" title="Code">💻</a></td>
   </tr>
 </table>
 
