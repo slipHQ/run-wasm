@@ -1,5 +1,3 @@
-TODO: Update for Clarity
-
 <p align="center">
 <a href="https://www.runwasm.com">
 <img src="https://user-images.githubusercontent.com/22961671/135009624-47470419-7e17-47b5-99ed-0f15b8123dd0.png" width=600 />
@@ -10,7 +8,7 @@ TODO: Update for Clarity
 
 [run-wasm](https://www.runwasm.com) is an easy to use tool for running WASM based code executions in the browser.
 
-Brought to you by [Slip](https://www.slip.so) and our amazing OSS contributors.
+Brought to you by [Pointer](https://www.pointer.gg) and our amazing OSS contributors.
 
 ## Install
 
@@ -26,96 +24,80 @@ yarn
 yarn add @run-wasm/run-wasm
 ```
 
-## Usage - Python
+## Usage - Clarity
 
-After installing run-wasm you'll need to import the run-wasm python package
+After installing run-wasm you'll need to import the run-wasm clarity package
 
-Install run-wasm python package
+Install run-wasm clarity package
 
 ```bash
-npm i @run-wasm/python
+npm i @run-wasm/clarity
 ```
 
 yarn
 
 ```bash
-yarn add @run-wasm/python
+yarn add @run-wasm/clarity
 ```
 
-`@run-wasm/python` uses Pyodide to execute Python. We recommend using the latest version of Pyodide and bringing it into your project via a script.
+`@run-wasm/clarity` uses WASM to execute Clarity. You can use the `clarity_repl_bg.wasm` from the clarity-repl module.
 
-[Next.js example](https://github.com/slipHQ/run-wasm/blob/main/example-nextjs/pages/index.tsx)
+[Next.js example](https://github.com/slipHQ/run-wasm/blob/main/example-nextjs/pages/clarity.tsx)
 
 ```jsx
-import React, { useEffect, useState, useRef } from 'react'
-import { createPythonClient } from '@run-wasm/python'
-import { Editor } from '@run-wasm/run-wasm
+import React from 'react'
+import { createClarityClient } from '@run-wasm/clarity'
 import Script from 'next/script'
+import CodeRunnerUI from '../components/CodeRunnerUI'
+import { GetServerSidePropsContext } from 'next'
 
-declare global {
-  // <- [reference](https://stackoverflow.com/a/56458070/11542903)
-  interface Window {
-    pyodide: any
-    languagePluginLoader: any
-    loadPyodide: Function
-  }
+// REPL-only code to mint STX to the tx-sender address
+const initCode = '::mint_stx ST000000000000000000002AMW42H 1000000'
+
+// Initial code demos an STX transfer to some address
+const initialCode = `(define-constant someone 'ST1HTBVD3JG9C05J7HBJTHGR0GGW7KXW28M5JS8QE)
+
+;; this address has starting balance of 0
+(print (stx-get-balance someone))
+
+;; transfer it some STX
+(stx-transfer? u1000 tx-sender someone)
+
+;; check new balance
+(stx-get-balance someone)`
+
+// Copied clarity_repl_bg.wasm from clarity-repl module
+const url = `https://example.com/clarity_repl_bg.wasm`
+
+type Props = {
+  urlPrefix: string,
 }
 
-const initialCode = `# Implementation of the Sieve of Eratosthenes
-# https://stackoverflow.com/questions/3939660/sieve-of-eratosthenes-finding-primes-python
-# Finds all prime numbers up to n
-def eratosthenes(n):
-    multiples = []
-    for i in range(2, n+1):
-        if i not in multiples:
-            print (i)
-            for j in range(i*i, n+1, i):
-                multiples.append(j)
-eratosthenes(100)`
-
-function App() {
-  const [pyodide, setPyodide] = useState(null)
-  const [output, setOutput] = React.useState('')
+function ClarityPage({ urlPrefix }: Props) {
+  const clarityClient = createClarityClient(new URL(url), initCode)
 
   async function runCode(code: string) {
-    let pythonClient = createPythonClient(pyodide)
-    const output = await pythonClient.run({ code })
-    if (output) {
-      setOutput(output)
-    }
+    // Reset the client each run
+    await clarityClient.initialise()
+    const output = await clarityClient.run(code)
+    return output
   }
-
-  // Note that window.loadPyodide comes from the beforeInteractive pyodide.js Script
-  useEffect(() => {
-    window
-      .loadPyodide({
-        indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.18.1/full/',
-      })
-      .then((pyodide) => {
-        setPyodide(pyodide)
-      })
-  }, [])
 
   return (
     <>
-      <Script
-        src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"
-        strategy="beforeInteractive"
-      />
-      <Editor
+      <Script src="https://kit.fontawesome.com/137d63e13e.js" />
+      <CodeRunnerUI
         initialCode={initialCode}
-        output={output}
-        languageLabel="Python"
-        hideOutputEditor={hideOutputEditor}
-        isLoading={isLoading}
-        defaultLanguage="python"
+        languageLabel="Clarity"
+        defaultLanguage="clarity"
         onRunCode={runCode}
-      />
+        isLoading={!clarityClient}
+      ></CodeRunnerUI>
     </>
   )
 }
 
-export default App
+export default ClarityPage
 ```
 
 ## Goal of the project
@@ -124,4 +106,4 @@ The goal of this project is to build an easy way to execute various programming 
 
 People should be able to use this project to embed executable code snippets on their websites easily!
 
-We're building this as a new component to be used inside the [Slip](https://www.slip.so) authoring tool.
+We're building this as a new component to be used inside [Pointer](https://www.pointer.gg) tutorials.
