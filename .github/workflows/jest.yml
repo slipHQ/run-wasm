@@ -32,6 +32,11 @@ jobs:
       - name: Bootstrap and run the Build
         run: yarn bootstrap --no-ci
 
+      # Links React dependency
+      - name: Linking dependencies
+        working-directory: ./example-nextjs
+        run: yarn && yarn link-react
+
       # Runs the tests
       - name: Run tests
         run: yarn test
