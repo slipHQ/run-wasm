@@ -6,7 +6,7 @@ name: Jest Tests
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [main]
+    branches: [main, cm/fix-ci]
   pull_request:
     branches: [main]
 
