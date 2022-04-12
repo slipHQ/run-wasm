@@ -33,6 +33,11 @@ export default function Navbar({ current }) {
         href: '/ts',
         current: current === 'TypeScript',
       },
+      {
+        name: 'Clarity',
+        href: '/clarity',
+        current: current === 'Clarity',
+      },
     ],
     [current]
   )
