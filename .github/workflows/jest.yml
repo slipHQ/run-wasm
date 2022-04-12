@@ -35,7 +35,7 @@ jobs:
       # Links React dependency
       - name: Linking dependencies
         working-directory: ./example-nextjs
-        run: yarn link-react
+        run: yarn && yarn link-react
 
       # Runs the tests
       - name: Run tests
