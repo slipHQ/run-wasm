@@ -238,6 +238,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@run-wasm/clarity@link:../packages/run-wasm-clarity":
+  version "0.0.0"
+  uid ""
+
 "@run-wasm/python@link:../packages/run-wasm-python":
   version "0.0.0"
   uid ""
@@ -794,6 +798,11 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
   dependencies:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
+
+clarity-repl@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/clarity-repl/-/clarity-repl-0.25.0.tgz#3fbe9b38d989dec80c94f7dda808d21844475a41"
+  integrity sha512-/wLioL/6X3ZDdzi30AvavNkyL/TyKUywwuTtLs1qALOM479q6TkYPCZ2cLPUHD9eL2TQ79+4m6HQ/GeH6OEppA==
 
 classnames@2.2.6:
   version "2.2.6"
