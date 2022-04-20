@@ -47,7 +47,7 @@ yarn add @run-wasm/python
 ```jsx
 import React, { useEffect, useState, useRef } from 'react'
 import { createPythonClient } from '@run-wasm/python'
-import { Editor } from '@run-wasm/run-wasm
+import { Editor } from '@run-wasm/run-wasm'
 import Script from 'next/script'
 
 declare global {
